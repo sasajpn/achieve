@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'helps/confirm' => 'helps#confirm'
   get 'helps/new' => 'helps#new'
   post 'helps/new' => 'helps#new'
-  post 'helps/confirm' => 'helps#confirm'
+  # post 'helps/confirm' => 'helps#confirm'
   post '/helps' => 'helps#create'
   get 'helps/thanks' => 'helps#thanks'
 
