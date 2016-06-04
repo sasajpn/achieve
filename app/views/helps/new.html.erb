@@ -1,0 +1,7 @@
+<%= form_for(@help, url: helps_confirm_path) do |f| %>
+<%= f.label :name, 'お名前' %>
+<%= f.text_field :name %>
+<%= f.label :content, 'お問い合わせ内容' %>
+<%= f.text_area :content %>
+<%= f.submit '確認' %>
+<% end %>

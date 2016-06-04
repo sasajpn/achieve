@@ -1,0 +1,17 @@
+<%= form_for(@help, url: helps_path) do |f| %>
+<%= f.hidden_field :name %>
+<p>
+    お名前
+    <%= @help.name %>
+</p>
+<%= f.hidden_field :content %>
+<p>
+    内容
+    <%= @help.content %>
+</p>
+
+
+<p>お問い合わせ内容はこちらでよろしいですか？</p>
+
+<%= f.submit '送信' %>
+<% end %>

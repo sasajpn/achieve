@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  root to: 'top#index'
+  
+  get 'helps/confirm' => 'helps#confirm'
+  get 'helps/new' => 'helps#new'
+  post 'helps/confirm' => 'helps#confirm'
+  post '/helps' => 'helps#create'
+  get 'helps/thanks' => 'helps#thanks'
+
   resources :blogs
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
