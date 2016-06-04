@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160604094953) do
 
   create_table "helps", force: :cascade do |t|
     t.string   "name"
+    t.string   "email"
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

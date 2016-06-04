@@ -4,6 +4,13 @@
     お名前
     <%= @help.name %>
 </p>
+
+<%= f.hidden_field :email %>
+<p>
+    メールアドレス
+    <%= @help.email %>
+</p>
+
 <%= f.hidden_field :content %>
 <p>
     内容
@@ -14,4 +21,11 @@
 <p>お問い合わせ内容はこちらでよろしいですか？</p>
 
 <%= f.submit '送信' %>
+<% end %>
+
+<%= form_for(@help, url: helps_new_path) do |f| %>
+<%=f.hidden_field :name %>
+<%=f.hidden_field :email %>
+<%=f.hidden_field :content %>
+<%= f.submit '戻る', name: 'back' %>
 <% end %>

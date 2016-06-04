@@ -1,0 +1,21 @@
+ja:
+  attributes:
+    name: 名前
+    email: メールアドレス
+    content: お問い合わせ内容
+  activerecord:
+    errors:
+      models:
+        help:
+          attributes:
+            name:
+              invalid: が正しくありません。
+              blank: が入力されていません。
+              too_long: が長すぎます。
+            email:
+              invalid: が正しくありません。
+              blank: が入力されていません。
+              too_long: が長すぎます。
+            content:
+              blank: が入力されていません。
+        
