@@ -4,7 +4,7 @@ ja:
     email: メールアドレス
     content: お問い合わせ内容
     password: パスワード
-    password_confirmation: パスワードとパスワード(確認用)
+    password_confirmation: パスワード(確認用)
   activerecord:
     errors:
       models:
