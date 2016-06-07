@@ -5,6 +5,7 @@ ja:
     content: お問い合わせ内容
     password: パスワード
     password_confirmation: パスワード(確認用)
+    current_password: 現在のパスワード
   activerecord:
     errors:
       models:
@@ -36,4 +37,7 @@ ja:
             name:
               blank: が入力されていません。
               too_long: が長すぎます。
+            current_password:
+              blank: が入力されていません。
+              invalid: が正しくありません。
         
