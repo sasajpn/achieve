@@ -3,6 +3,8 @@ ja:
     name: 名前
     email: メールアドレス
     content: お問い合わせ内容
+    password: パスワード
+    password_confirmation: パスワードとパスワード(確認用)
   activerecord:
     errors:
       models:
@@ -18,4 +20,19 @@ ja:
               too_long: が長すぎます。
             content:
               blank: が入力されていません。
+        user:
+          attributes:
+            email:
+              blank: が入力されていません。
+              invalid: が正しくありません。
+              too_long: が長すぎます。
+            password:
+              blank: が入力されていません。
+              too_short: が短すぎます。
+              too_long: が長すぎます。
+            password_confirmation:
+              confirmation: が一致しません。
+            name:
+              blank: が入力されていません。
+              too_long: が長すぎます。
         
