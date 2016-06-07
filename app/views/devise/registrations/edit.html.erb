@@ -39,6 +39,6 @@
 
 <h3>退会する</h3>
 
-<p>退会しますか？ <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>退会しますか？ <%= button_to "退会する", registration_path(resource_name), data: { confirm: "本当によろしいですか？" }, method: :delete %></p>
 
 <%= link_to "戻る", :back %>
