@@ -1,7 +1,7 @@
 ja:
   devise:
     confirmations:
-      confirmed: "ユーザー登録が完了しました"
+      confirmed: "ユーザー登録が完了しましたｑ"
       send_instructions: "アカウントの確認方法を数分以内にメールでご連絡します。"
       send_paranoid_instructions: "ご登録のメールアドレスが保存されている場合、アカウントの確認方法をメールでご連絡します。"
     failure:
@@ -16,7 +16,7 @@ ja:
       unconfirmed: "本登録を行ってください。"
     mailer:
       confirmation_instructions:
-        subject: "アカウントの登録方法"
+        subject: "ユーザー登録を完了させてください"
       reset_password_instructions:
         subject: "パスワードの再設定"
       unlock_instructions:
