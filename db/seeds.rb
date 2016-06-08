@@ -8,3 +8,4 @@
 
 user = User.new(:email => "sample@sample.com", :password => 'password')
 user.save
+user.confirm!

@@ -1,4 +1,6 @@
-<h2>ユーザー情報変更<%= resource_name.to_s.humanize %></h2>
+<div class="container">
+<div class="login">
+<h4>ユーザー情報変更</h4>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -18,7 +20,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(パスワードを変更しない場合、入力は不要です)</i><br />
+    <%= f.label :password %> <i>(変更しない場合入力は不要です)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
 
@@ -33,12 +35,20 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "変更" %>
+    <%= f.submit "変更", class: "btn btn-sm btn-success submit" %>
   </div>
 <% end %>
 
-<h3>退会する</h3>
+<br \>
+<%= link_to "退会しますか？", registration_path(resource_name), data: { confirm: "本当に退会しますか？"}, method: :delete %>
 
-<p>退会しますか？ <%= button_to "退会する", registration_path(resource_name), data: { confirm: "本当によろしいですか？" }, method: :delete %></p>
 
-<%= link_to "戻る", :back %>
+</div>
+</div>
+
+
+
+
+
+
+
