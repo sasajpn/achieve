@@ -39,6 +39,11 @@
 </div>
 </div>
 
+<a href="/users/auth/facebook" class="btn btn-lg btn-social btn-facebook">
+  <i class="fa fa-facebook"></i>Facebookで登録する
+</a>
+<%= link_to "facebook認証", user_omniauth_authorize_path(:facebook), class: 'navbar-link' %>
+
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
     <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
