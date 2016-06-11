@@ -268,9 +268,9 @@ Devise.setup do |config|
   
   if Rails.env.production?
     config.omniauth :facebook, "200156590380215", "477cabf5fa39d04ac633e3be8d85acba", :scope => 'email', :display => 'popup', :info_fields => 'name, email'
-    # config.omniauth :twitter, "key", "secret"
+    config.omniauth :twitter, "7yWfZSrERlbLLEmh5rOx4VmWq", "BYMpdd5GqZSGsITJ1CagSlKfiTN2caHL3wcY57CuHKsUm9L0NQ"
   else
     config.omniauth :facebook, "999049066837819", "17b72563606d62f574b69407669b4337", :scope => 'email', :display => 'popup', :info_fields => 'name, email'
-    # config.omniauth :twitter, "key", "secret"
+    config.omniauth :twitter, "3cwYxf6qj7EIL752UhbXE25nc", "knSZFPv6nlgWh3hfacwc4K5PlR8fPkN2mLmdk1hZNG77BrP03E"
   end
 end
