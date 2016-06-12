@@ -18,7 +18,7 @@
          <% else %>
          <%= profile_img blog.user %>
          <% end %>
-        <%= blog.user.name %></em></p>
+        <%= link_to "#{blog.user.name}", user_path(blog.user) %></em></p>
       <% if current_user?(blog.user) %>
         <%= link_to "編集", edit_blog_path(blog) %>
         <%= link_to "削除", blog_path(blog), data: { confirm: "本当に削除しますか？" }, method: :delete %>
