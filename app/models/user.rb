@@ -18,8 +18,7 @@ class User < ActiveRecord::Base
                        provider: auth.provider, 
                        uid:      auth.uid, 
                        email:    auth.info.email,
-                      # password: Devise.friendly_token[0,20]
-                      )
+                      password: Devise.friendly_token[0,20])
     end
     user
   end
@@ -31,8 +30,7 @@ class User < ActiveRecord::Base
                        provider: auth.provider,
                        uid:      auth.uid,
                        email:    User.create_unique_email,
-                      # password: Devise.friendly_token[0,20]
-                      )
+                      password: Devise.friendly_token[0,20])
     end
     user
   end
