@@ -1,2 +1,23 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <% if !@user.name.blank? %>
+        <h3><%= @user.name %>さんのプロフィール</h3>
+        <% else %>
+        <h3>ユーザーのプロフィール</h3>
+        <% end %>
+        <div class="thumbnail">
+            <div class="caption">
+                <h3>
+                    <% if @user.image? %>
+                    <%= image_tag @user.image.thumb.url, class: "avatar" %>
+                    <% else %>
+                    <%= profile_img @user %>
+                    <% end %>
+                    <%= @user.name %>
+                </h3>
+                <p><%= @user.profile %></p>
+            </div>
+        </div>
+    </div>
+</div>

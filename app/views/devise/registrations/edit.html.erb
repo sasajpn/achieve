@@ -22,6 +22,11 @@
   <%= f.label :remove_image, "プロフィール画像を削除する" %>
   <%= f.check_box :remove_image %>
   <% end %>
+  
+  <div class="field">
+    <%= f.label :profile, "プロフィール" %>
+    <%= f.text_area :profile %>
+  </div>
 
  <% if !(current_user.provider == "facebook" || current_user.provider == "twitter") %>
   <div class="field">
