@@ -18,7 +18,8 @@ class User < ActiveRecord::Base
                        provider: auth.provider, 
                        uid:      auth.uid, 
                        email:    auth.info.email,
-                       password: Devise.friendly_token[0,20])
+                      # password: Devise.friendly_token[0,20]
+                      )
     end
     user
   end
@@ -30,7 +31,8 @@ class User < ActiveRecord::Base
                        provider: auth.provider,
                        uid:      auth.uid,
                        email:    User.create_unique_email,
-                       password: Devise.friendly_token[0,20])
+                      # password: Devise.friendly_token[0,20]
+                      )
     end
     user
   end
@@ -42,6 +44,13 @@ class User < ActiveRecord::Base
   def self.create_unique_email
     User.create_unique_string + "@example.com"
   end
-         
+  
+  def update_with_password(params, *options)
+    if encrypted_password.blank?
+      update_attributes(params, *options)
+    else
+      super
+    end
+  end
 
 end
