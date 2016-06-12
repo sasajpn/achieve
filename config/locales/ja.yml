@@ -6,6 +6,7 @@ ja:
     password: パスワード
     password_confirmation: パスワード(確認用)
     current_password: 現在のパスワード
+    confirmation_token: 認証トークン
   activerecord:
     errors:
       models:
@@ -40,4 +41,6 @@ ja:
             current_password:
               blank: が入力されていません。
               invalid: が正しくありません。
+            confirmation_token:
+              invalid: が無効です。
         
