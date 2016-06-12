@@ -23,12 +23,12 @@
   <%= f.check_box :remove_image %>
   <% end %>
 
+ <% if !(current_user.provider == "facebook" || current_user.provider == "twitter") %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
 
-  <% if !(current_user.provider == "facebook" || current_user.provider == "twitter") %>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
