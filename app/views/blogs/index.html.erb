@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'New Blog', new_blog_path %>
+<h5 class="new-form">
+<%= link_to '記事を作成する', new_blog_path %>
+</h5>
 
 <% @blogs.each do |blog| %>
   <div class="panel panel-primary">
@@ -9,7 +11,6 @@
     </div>
     <div class="panel-body">
       <%= blog.content %><br />
-      <em><%= blog.created_at %></em>
       <p>
         <em>投稿者：
          <% if blog.user.image? %>
@@ -22,6 +23,8 @@
         <%= link_to "編集", edit_blog_path(blog) %>
         <%= link_to "削除", blog_path(blog), data: { confirm: "本当に削除しますか？" }, method: :delete %>
       <% end %>
+        <br \>
+        <em>作成日：<%= blog.created_at %></em>
     </div>
   </div>
 <% end %>

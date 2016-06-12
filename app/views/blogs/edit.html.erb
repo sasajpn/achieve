@@ -1,6 +1,13 @@
-<h1>Editing Blog</h1>
+<div class="container">
+<div class="blog-form">
+<h3>記事の編集</h3>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @blog %> |
-<%= link_to 'Back', blogs_path %>
+<div class="blog-link">
+<%= link_to '記事詳細へ', @blog %> |
+<%= link_to '記事一覧へ', blogs_path %>
+</div>
+
+</div>
+</div>
