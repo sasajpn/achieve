@@ -28,6 +28,7 @@
     <%= f.text_field :name %>
   </div>
 
+  <% if !(current_user.provider == "facebook" || current_user.provider == "twitter") %>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
@@ -51,6 +52,7 @@
     <%= f.label :current_password %> <i>(登録しているパスワードを入力してください)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "変更", class: "btn btn-sm btn-success submit" %>

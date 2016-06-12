@@ -8,17 +8,14 @@ class User < ActiveRecord::Base
 
   has_many :blogs, dependent: :destroy
   
-
-  
-  
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
     unless user
     user = User.new(name:     auth.extra.raw_info.name, 
-                       provider: auth.provider, 
-                       uid:      auth.uid, 
-                       email:    auth.info.email,
-                      password: Devise.friendly_token[0,20])
+                    provider: auth.provider, 
+                    uid:      auth.uid, 
+                    email:    auth.info.email,
+                    password: Devise.friendly_token[0,20])
     end
     user
   end
@@ -27,10 +24,10 @@ class User < ActiveRecord::Base
     user = User.where(provider: auth.provider, uid: auth.uid).first
     unless user
     user = User.new(name:     auth.info.nickname,
-                       provider: auth.provider,
-                       uid:      auth.uid,
-                       email:    User.create_unique_email,
-                      password: Devise.friendly_token[0,20])
+                    provider: auth.provider,
+                    uid:      auth.uid,
+                    email:    User.create_unique_email,
+                    password: Devise.friendly_token[0,20])
     end
     user
   end
@@ -43,12 +40,25 @@ class User < ActiveRecord::Base
     User.create_unique_string + "@example.com"
   end
   
-  def update_with_password(params, *options)
-    if encrypted_password.blank?
-      update_attributes(params, *options)
-    else
-      super
+  def update_without_current_password(params, *options)
+    params.delete(:current_password)
+ 
+    if params[:password].blank? && params[:password_confirmation].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation)
     end
+ 
+    result = update_attributes(params, *options)
+    clean_up_passwords
+    result
   end
+  
+  # def password_required?
+  #   if self.provider == "facebook" || self.provider == "twitter"
+  #     false
+  #   else
+  #     !persisted? || !password.nil? || !password_confirmation.nil?
+  #   end
+  # end
 
 end
