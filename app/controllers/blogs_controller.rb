@@ -1,6 +1,7 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :correct_user, only: :destroy
 
   # GET /blogs
   # GET /blogs.json
@@ -71,5 +72,11 @@ class BlogsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
       params.require(:blog).permit(:title, :content)
+    end
+    
+    def correct_user
+      @blog = current_user.blogs.find_by(id: params[:id])
+      flash[:alert] = "無効なリクエストです。"
+      redirect_to blogs_url if @blog.nil?
     end
 end
