@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'about/company_overview'
+
+  get 'about/compny_overview'
+
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
@@ -15,8 +19,8 @@ Rails.application.routes.draw do
   post '/helps' => 'helps#create'
   get 'helps/thanks' => 'helps#thanks'
   
-  resources :blogs
+  get 'about' => 'about#company_overview'
   
-  match "*path" => "application#handle_404", via: :all
+  resources :blogs
 
 end
