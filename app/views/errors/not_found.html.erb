@@ -28,6 +28,13 @@
     line-height: 1.5em;
     margin: 10px 0;
   }
+  
+  h2 {
+    font-size: 100%;
+    color: #730E15;
+    line-height: 1.0em;
+    margin: 5px 0;
+  }
 
   div.dialog p {
     margin: 16px 0;
@@ -53,7 +60,8 @@
 <div class="dialog">
   <div>
     <h1>お探しのページが見つかりません。</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
+    <h2>誠に申し訳ございませんが、別のページをお探しください。</h2>
+    <h2><%= link_to "ユーザー登録の場合はこちらからどうぞ", new_user_registration_path %></h2>
   </div>
-  <p>If you are the application owner check the logs for more information.</p>
+  <p><%= link_to "お問い合わせフォームはこちら", helps_new_path %></p>
 </div>
