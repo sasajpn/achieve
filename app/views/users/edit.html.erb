@@ -1,0 +1,16 @@
+<div class="container">
+<div class="login">
+<%= form_for current_user do |f| %>
+<div class="field">
+<%= f.label :name, "名前" %><br \>
+<%= f.text_field :name %>
+</div>
+<div class="field">
+<%= f.label :profile, "プロフィール" %><br \>
+<%= f.text_field :profile %>
+</div>
+<br \>
+<%= f.submit %>
+<% end %>
+</div>
+</div>
