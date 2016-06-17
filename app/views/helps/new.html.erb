@@ -1,16 +1,32 @@
+<div class="container">
+<div class="login">
+
 <%= form_for(@help, url: helps_confirm_path) do |f| %>
 <%= render 'shared/error_messages' %>
 
-<%= f.label :name, 'お名前' %>
+<div class="field">
+<%= f.label :name, 'お名前' %><br \>
 <%= f.text_field :name %>
+</div>
 
-<%= f.label :email, 'メールアドレス' %>
+<br \>
+<div class="field">
+<%= f.label :email, 'メールアドレス' %><br \>
 <%= f.text_field :email %>
+</div>
 
-<%= f.label :content, 'お問い合わせ内容' %>
-<%= f.text_area :content %>
+<br \>
+<div class="field">
+<%= f.label :content, 'お問い合わせ内容' %><br \>
+<%= f.text_area :content, cols: 30, rows: 8 %>
+</div>
 
+<br \>
 <%= f.submit '確認' %>
 <% end %>
 
+<br \>
 <%= link_to 'トップページ', root_path, class: 'btn' %>
+
+</div>
+</div>

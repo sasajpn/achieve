@@ -1,31 +1,39 @@
+<div class="container">
+<div class="login">
+    
 <%= form_for(@help, url: helps_path) do |f| %>
 <%= f.hidden_field :name %>
-<p>
-    お名前
-    <%= @help.name %>
-</p>
+<div class="panel panel-primary">
+<div class="panel-heading">お名前</div>
+<div class="panel-body"><%= @help.name %></div>
+</div>
 
 <%= f.hidden_field :email %>
-<p>
-    メールアドレス
-    <%= @help.email %>
-</p>
+<div class="panel panel-primary">
+<div class="panel-heading">メールアドレス</div>
+<div class="panel-body"><%= @help.email %></div>
+</div>
 
 <%= f.hidden_field :content %>
-<p>
-    内容
-    <%= @help.content %>
-</p>
+<div class="panel panel-primary">
+<div class="panel-heading">お問い合わせ内容</div>
+<div class="panel-body"><%= simple_format(@help.content) %></div>
+</div>
 
-
+<br \>
 <p>お問い合わせ内容はこちらでよろしいですか？</p>
 
-<%= f.submit '送信' %>
+<br \>
+<%= f.submit '送信', class: "btn btn-primary" %>
 <% end %>
 
+<br \>
 <%= form_for(@help, url: helps_new_path) do |f| %>
 <%=f.hidden_field :name %>
 <%=f.hidden_field :email %>
 <%=f.hidden_field :content %>
-<%= f.submit '戻る', name: 'back' %>
+<%= f.submit '戻る', name: 'back', class: "btn btn-warning" %>
 <% end %>
+
+</div>
+</div>
