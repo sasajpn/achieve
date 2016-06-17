@@ -60,3 +60,6 @@ gem 'faker'
 gem 'rspec-rails'
 gem 'capybara'
 gem 'rambulance'
+gem 'mail'
+
+gem 'exception_notification'
