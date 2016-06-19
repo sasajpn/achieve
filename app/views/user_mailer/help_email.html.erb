@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    </head>
-    <body>
+<p><%= @help.name %>様</p>
+        <br \>
+        <p>以下の内容でお問い合わせ承りました。</p>
         <p><%= simple_format(@help.content) %></p>
         <br \>
-        <p>ご連絡先:<%= @help.email %></p>
-    </body>
-</html>
+        <p>ご返答までお時間いただくこともございますが、しばらくお待ちくださいませ。</p>
+        <br \>
+        <p>お問い合わせいただきありがとうございました。</p>

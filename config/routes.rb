@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'about/company_overview'
-
-  get 'about/compny_overview'
+  
+  get '/email' => 'email#recieve_email'
 
   devise_for :users, controllers: {
     sessions: "users/sessions",
