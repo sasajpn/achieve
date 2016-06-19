@@ -25,9 +25,6 @@ require 'mail'
             UserMailer.help_email(@help).deliver_later
             UserMailer.self_help_email(@help).deliver_later
 
-
-            # Mail.first
-
             redirect_to action: :thanks
         else
             render 'new'
