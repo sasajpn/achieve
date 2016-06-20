@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   
   get 'about' => 'about#company_overview'
   
-  resources :blogs
+  resources :blogs do
+    resources :comments
+  end
 
 end
