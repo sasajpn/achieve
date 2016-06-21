@@ -13,6 +13,16 @@
   <%= @blog.content %>
 </p>
 
+<p>
+<div id="comment-area">
+  <%= render partial: 'comments/index', locals: { comments: @comments } %>
+</div>
+</p>
+
+<p>
+  <%= render partial: 'comments/form', locals: { comment: @comment } %>
+</p>
+
 <%= link_to '記事を編集する', edit_blog_path(@blog) %> |
 <%= link_to '記事一覧へ', blogs_path %>
 
