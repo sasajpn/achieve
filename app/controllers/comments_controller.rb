@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to blog_path(@comment.blog_id), notice: 'コメントしました。.' }
         format.json { render :show, status: :created, location: @comment }
         @blog = @comment.blog
-        format.js
+        format.js { render :index, notice: 'コメントしました。' }
       else
         format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
@@ -60,6 +60,8 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to blog_path(@comment.blog), notice: 'コメントを削除しました。' }
       format.json { head :no_content }
+      @blog = @comment.blog
+      format.js { render :index, notice: 'コメントを削除しました。' }
     end
   end
 
