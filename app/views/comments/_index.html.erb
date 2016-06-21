@@ -3,6 +3,8 @@
         <li>
           <%= comment.user %>
           <%= comment.content %>
+          <%= link_to '編集', edit_blog_comment_path(@blog, comment) %>
+          
         </li>
       <% end %>
   <% end %></ul>
