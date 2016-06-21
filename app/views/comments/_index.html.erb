@@ -4,7 +4,7 @@
           <%= comment.user %>
           <%= comment.content %>
           <%= link_to '編集', edit_blog_comment_path(@blog, comment) %>
-          <%= link_to '削除', comment, method: :delete, data: { confirm: "本当に削除してもよろしいでうか？" } %>
+          <%= link_to '削除', comment, method: :delete, data: { confirm: "本当に削除してもよろしいですか？" } %>
           
         </li>
       <% end %>
