@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :comments
+  
   get 'about/company_overview'
   
   get '/email' => 'email#recieve_email'
@@ -10,7 +11,15 @@ Rails.application.routes.draw do
     passwords: "users/passwords",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
-  resources :users, only: [:index, :show, :edit, :update]
+  
+  resources :users, only: [:index, :show, :edit, :update] do
+    member do
+      get :following, :followers
+    end
+  end
+  
+  resources :relationships, only: [:create, :destroy]
+  
   root to: 'top#index'
   
   get 'helps/confirm' => 'helps#confirm'
