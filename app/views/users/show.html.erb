@@ -1,26 +1,26 @@
-
 <div class="row">
-    <div class="col-sm-6 col-md-4">
-        <% if !@user.name.blank? %>
-        <h3><%= @user.name %>さんのプロフィール</h3>
-        <% else %>
-        <h3>ユーザーのプロフィール</h3>
-        <% end %>
-        <div class="thumbnail">
-            <div class="caption">
-                <h3>
-                    <% if @user.image? %>
-                    <%= image_tag @user.image.thumb.url, class: "avatar" %>
-                    <% else %>
-                    <%= profile_img @user %>
-                    <% end %>
-                    <%= @user.name %>
-                </h3>
-                <p><%= @user.profile %></p>
-                <% if current_user && current_user.id == @user.id %>
-                <%= link_to '編集', edit_user_path(current_user.id) %>
-                <% end %>
-            </div>
-        </div>
-    </div>
+<div class="col-sm-6 col-md-4">
+<div class="thumbnail">
+<div class="caption">
+<h3>
+    <% if @user.image? %>
+    <%= image_tag @user.image.thumb.url, class: "avatar" %>
+    <% else %>
+    <%= profile_img @user %>
+    <% end %>
+</h3>
+    <p><%= @user.profile %></p>
+    <% if current_user && current_user.id == @user.id %>
+    <%= link_to '編集', edit_user_path(current_user.id) %>
+    <% end %>
+<% if @user != current_user %>
+<%= render partial: "follow_form", locals: { user: @user } if signed_in? %>
+<% end %>
+
+</div>
+</div>
+<% @firend_users ||= current_user %>
+<!--<%= link_to '友達'%>-->
+<%= link_to '戻る', users_path %>
+</div>
 </div>

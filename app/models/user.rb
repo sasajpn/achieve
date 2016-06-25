@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
   
-  第三段階「相対的な参照関係を定義する」
+  # 第三段階「相対的な参照関係を定義する」
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
   

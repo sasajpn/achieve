@@ -5,9 +5,13 @@
 </h5>
 
 <% @blogs.each do |blog| %>
+<% if current_user.following?(blog.user) && blog.user.following?(current_user) || blog.user == current_user %>
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= blog.title %></h3>
+      <h3 class="panel-title">
+        <%= blog.title %>
+        
+      </h3>
     </div>
     <div class="panel-body">
       <%= blog.content %><br /><br \>
@@ -25,6 +29,9 @@
       <% end %>
         <br \>
         <em>作成日：<%= blog.created_at %></em>
+        <br \>
+        <em><%= link_to "ブログ詳細へ", blog_path(blog) %></em>
     </div>
   </div>
+<% end %>
 <% end %>
