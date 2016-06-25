@@ -1,7 +1,8 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :correct_user, only: :destroy
+  before_action :correct_user, only: [:destroy, :edit]
+  before_action :follow_check, only: [:show]
 
   # GET /blogs
   # GET /blogs.json
@@ -46,7 +47,7 @@ class BlogsController < ApplicationController
   def update
     respond_to do |format|
       if @blog.update(blog_params)
-        format.html { redirect_to @blog, notice: 'Blog was successfully updated.' }
+        format.html { redirect_to @blog, notice: 'ブログを投稿しました。' }
         format.json { render :show, status: :ok, location: @blog }
       else
         format.html { render :edit }
@@ -60,7 +61,7 @@ class BlogsController < ApplicationController
   def destroy
     @blog.destroy
     respond_to do |format|
-      format.html { redirect_to blogs_url, notice: 'Blog was successfully destroyed.' }
+      format.html { redirect_to blogs_url, notice: 'ブログを削除しました.' }
       format.json { head :no_content }
     end
   end
@@ -80,5 +81,15 @@ class BlogsController < ApplicationController
       @blog = current_user.blogs.find_by(id: params[:id])
       flash[:alert] = "無効なリクエストです。"
       redirect_to blogs_url if @blog.nil?
+    end
+    
+    
+    
+    def follow_check
+      @blog = Blog.find(params[:id])
+      if !(current_user.following?(@blog.user) && @blog.user.following?(current_user)) && !(@blog.user == current_user)
+        flash[:alert] = "そのブログのユーザーと友達ではありません。"
+        redirect_to blogs_url
+      end
     end
 end

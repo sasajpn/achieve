@@ -1,8 +1,15 @@
+<div class="col-md-3 col-md-offset-5">
 <provide(:title, 'All users') %>
 <h2>ユーザー一覧</h2>
+<br \>
 <ul class="users">
     <%= render @users %>
 </ul>
+
+<%= paginate @users %>
+</div>
+
+
 
 <!--<% @users.each do |user| %>-->
 

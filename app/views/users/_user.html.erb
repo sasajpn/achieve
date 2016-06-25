@@ -1,4 +1,8 @@
-<li>
+<% if user != current_user %>
+<li class="users-list">
     <%= link_to user.name, user %>
+    <%= render partial: 'follow_form', locals: { user: user } if signed_in? %>
+    <br \>
 </li>
-<%= render partial: 'follow_form', locals: { user: user } if signed_in? %>
+
+<% end %>
