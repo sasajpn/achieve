@@ -1,7 +1,6 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+このREADMEには、アプリケーションを起動して実行するために必要なことを記載しています。
 
 Things you may want to cover:
 

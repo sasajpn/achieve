@@ -7,6 +7,35 @@ class User < ActiveRecord::Base
   mount_uploader :image, ImageUploader       
 
   has_many :blogs, dependent: :destroy
+  has_many :comments
+  
+  # 第一段階「中間テーブルと関係を定義する」
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+  
+  # 第三段階「相対的な参照関係を定義する」
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_relationships, source: :follower
+  
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+  
+  def unfollow!(other_user)
+    relationships.find_by(followed_id: other_user.id).destroy
+  end
+  
+  def following?(other_user)
+    relationships.find_by(followed_id: other_user.id)
+  end
+  
+  def each_other_friends
+    User.each_other_follows(self)
+  end
+  
+  def self.each_other_follows(user)
+    user.followers && user.followed_users
+  end
   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
@@ -61,12 +90,5 @@ class User < ActiveRecord::Base
     result
   end
   
-  # def password_required?
-  #   if self.provider == "facebook" || self.provider == "twitter"
-  #     false
-  #   else
-  #     !persisted? || !password.nil? || !password_confirmation.nil?
-  #   end
-  # end
 
 end
