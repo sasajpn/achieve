@@ -1,6 +1,6 @@
-<h1>Editing Comment</h1>
+<h1>コメントの編集</h1>
 
-<%= render partial: 'comments/form', locals: { comment: @comment } %>
 
-<%= link_to 'Show', blog_comment_path(@comment.blog, @comment) %> |
-<%= link_to 'Back', blog_path(@comment.blog) %>
+<%= render partial: 'comments/edit_form', locals: { comment: @comment } %>
+
+<%= link_to '戻る', blog_path(@comment.blog) %>
