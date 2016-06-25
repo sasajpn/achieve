@@ -13,7 +13,7 @@ class BlogsController < ApplicationController
   # GET /blogs/1
   # GET /blogs/1.json
   def show
-    @comment = @blog.comments.build
+    @comment = @blog.comments.build(user_id: current_user.id)
     @comments = @blog.comments
   end
 
