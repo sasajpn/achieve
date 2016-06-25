@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   mount_uploader :image, ImageUploader       
 
   has_many :blogs, dependent: :destroy
-  has_many :comments
+  has_many :comments, dependent: :destroy
   
   # 第一段階「中間テーブルと関係を定義する」
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
