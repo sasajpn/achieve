@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :destroy]
 
   # GET /comments
   # GET /comments.json
@@ -75,4 +76,13 @@ class CommentsController < ApplicationController
     def comment_params
       params.require(:comment).permit(:content, :blog_id, :user_id)
     end
+    
+    def correct_user
+      @comment = current_user.comments.find_by(id: params[:id])
+      if @comment.nil?
+       flash[:alert] = "無効なリクエストです。"
+       redirect_to blogs_url
+      end
+    end
+    
 end
