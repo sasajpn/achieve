@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
 
   has_many :blogs, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :tasks, dependent: :destroy
+  has_many :task_comments, dependent: :destroy
+  has_many :goodjobs, dependent: :destroy
   
   # 第一段階「中間テーブルと関係を定義する」
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -35,6 +38,11 @@ class User < ActiveRecord::Base
   
   def self.each_other_follows(user)
     user.followers && user.followed_users
+  end
+  
+  def taskfeed
+    each_other_follows = self.followers && self.followed_users
+    Task.where(user: each_other_follows)
   end
   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)

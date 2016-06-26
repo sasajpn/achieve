@@ -1,0 +1,6 @@
+<h1>Editing Task</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'タスク詳細へ', user_task_path(@task.user, @task) %> |
+<%= link_to 'タスク一覧へ', user_tasks_path(@task.user) %>

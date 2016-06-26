@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :taskline do
+    resources :task_comments
+  end
+  resources :tasks
   get 'relationships/create'
 
   get 'relationships/destroy'
@@ -17,8 +21,17 @@ Rails.application.routes.draw do
   }
   
   resources :users, only: [:index, :show, :edit, :update] do
+    resources :tasks
     member do
       get :following, :followers
+    end
+  end
+  
+  namespace :taskline do
+    resources :tasks do
+      resources :task_comment
+      post "ungoodjob"
+      post "goodjob"
     end
   end
   
