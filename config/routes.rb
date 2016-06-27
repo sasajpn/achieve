@@ -24,6 +24,25 @@ Rails.application.routes.draw do
     resources :tasks
     member do
       get :following, :followers
+      get :invited_project
+      get :join_project
+      post 'project_relations/create_approve'
+    end
+  end
+  
+  resources :projects do
+    member do
+      get :invite_form
+      get :inviting_user
+      get :project_member
+      post 'project_relations/create_invite'
+    end
+    resources :tasks
+  end
+  
+  resources :project_relations, only: [:create, :destroy] do
+    member do
+      delete "destroy_invite"
     end
   end
   

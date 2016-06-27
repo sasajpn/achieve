@@ -11,6 +11,13 @@ class User < ActiveRecord::Base
   has_many :tasks, dependent: :destroy
   has_many :task_comments, dependent: :destroy
   has_many :goodjobs, dependent: :destroy
+  has_many :projects, dependent: :destroy
+  
+  has_many :invited_relations, foreign_key: "invited_id", class_name: "ProjectRelation", dependent: :destroy
+  has_many :approving_relations, foreign_key: "approving_id", class_name: "ProjectRelation", dependent: :destroy
+  
+  has_many :invited_projects, through: :invited_relations, source: :inviting
+  has_many :approving_projects, through: :approving_relations, source: :approved
   
   # 第一段階「中間テーブルと関係を定義する」
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -44,6 +51,27 @@ class User < ActiveRecord::Base
     each_other_follows = self.followers && self.followed_users
     Task.where(user: each_other_follows)
   end
+  
+  # def invited?(project)
+  #   invited_relations.find_by(inviting_id: project.id)
+  # end
+  
+  def approve!(project)
+    approving_relations.create!(approved_id: project.id)
+  end
+  
+  def unapprove!(project)
+    approving_relations.find_by(approved_id: project.id).destroy
+  end
+  
+  def approving?(project)
+    approving_relations.find_by(approved_id: project.id)
+  end
+  
+  def join_project
+    self.invited_projects && self.approving_projects
+  end
+    
   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first

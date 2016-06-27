@@ -1,0 +1,11 @@
+<%= link_to "戻る", project_path(@project) %>
+<% @users.each do |user| %>
+<p><%= user.name %></p>
+<div id="invite_form_<%= user.id %>">
+<% if @project.inviting?(user) %>
+<%= render partial: "uninvite", locals: { project: @project, user: user } %>
+<% else %>
+<%= render partial: "invite", locals: { project: @project, user: user } %>
+<% end %>
+</div>
+<% end %>

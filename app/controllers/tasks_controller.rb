@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :correct_user
+  before_action :correct_user, only: [:edit, :destroy]
 
   # GET /tasks
   # GET /tasks.json
@@ -17,7 +17,8 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new(user_id: params[:user_id], charge_id: params[:user_id])
+    @project = Project.find(params[:project_id])
+    @task = @project.tasks.build(user_id: current_user.id, charge_id: current_user.id)
   end
 
   # GET /tasks/1/edit
@@ -27,11 +28,12 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @project = Project.find(params[:project_id])
+    @task = @project.tasks.build(task_params)
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to user_task_path(@task.user, @task), notice: 'タスクを作成しました。' }
+        format.html { redirect_to project_task_path(@task.project, @task), notice: 'タスクを作成しました。' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }

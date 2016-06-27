@@ -19,6 +19,9 @@
 
 </div>
 </div>
+<% if @user == current_user %>
+<%= link_to "招待されているプロジェクト", invited_project_user_path(current_user) %>
+<% end %>
 <% @firend_users ||= current_user %>
 <!--<%= link_to '友達'%>-->
 <%= link_to '戻る', users_path %>

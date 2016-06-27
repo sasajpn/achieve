@@ -1,0 +1,30 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Information:</strong>
+  <%= @project.information %>
+</p>
+
+<%= render partial: 'tasks/index', locals: { tasks: @project.tasks } %> 
+
+<p>
+  <%= link_to '新しくタスクを作る', new_project_task_path(@project) %>
+</p>
+
+<p>
+  <%= link_to "ユーザーを招待する", invite_form_project_path(@project) %>
+</p>
+
+<p>
+  <%= link_to "招待中ユーザー", inviting_user_project_path(@project) %>
+</p>
+
+<p>
+  <%= link_to "参加メンバー", project_member_project_path(@project) %>
+</p>
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

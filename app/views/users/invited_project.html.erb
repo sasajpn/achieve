@@ -1,0 +1,12 @@
+<% if @projects.any? %>
+<% @projects.each do |project| %>
+<p><%= project.name %></p>
+<div id="approve_form_<%= project.id %>">
+    <% if @user.approving?(project) %>
+    <p class="">参加済み</p>
+    <% else %>
+    <%= render partial: "approve", locals: { user: @user, project: project } %>
+    <% end %>
+</div>
+<% end %>
+<% end %>

@@ -3,6 +3,7 @@ class Task < ActiveRecord::Base
   has_many :goodjobs, dependent: :destroy
   belongs_to :user
   belongs_to :charge, class_name: 'User', foreign_key: 'charge_id'
+  belongs_to :project
   validates :title, presence: true
   validates :content, presence: true
   

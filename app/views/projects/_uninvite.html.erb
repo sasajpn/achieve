@@ -1,0 +1,3 @@
+<%= form_for(project.inviting_relations.find_by(invited_id: user.id), url: destroy_invite_project_relation_path(project.inviting_relations.find_by(invited_id: user.id)), html: { method: :delete }) do |f| %>
+<%= f.submit "招待を取り消す", class: "btn btn-success" %>
+<% end %>
