@@ -1,0 +1,4 @@
+<%= form_for(project.inviting_relations.build(invited_id: user.id), url: project_relations_create_invite_project_path(project)) do |f| %>
+<%= f.hidden_field :invited_id %>
+<%= f.submit "招待する", class: "btn btn-primary" %>
+<% end %>

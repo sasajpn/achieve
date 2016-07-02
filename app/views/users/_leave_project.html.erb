@@ -1,0 +1,4 @@
+<% @join_project = current_user.approving_relations.find_by(approved_id: project.id) %>
+<%= form_for(@join_project, url: destroy_join_project_project_relation_path(@join_project), html: { method: :delete }) do |f| %>
+<%= f.submit "このプロジェクトから脱退する", data: { confirm: "本当に脱退しますか？" }, class: "btn btn-danger btn-sm" %>
+<% end %>

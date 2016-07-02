@@ -1,0 +1,13 @@
+<div class="container">
+<div class="blog-form">
+<%= form_for(@project, url: change_admin_update_project_path(@project)) do |f| %>
+
+<p>
+メンバー名
+<br>
+<%= f.collection_select :admin_id, @project_members, :id, :name %>
+</p>
+<%= f.submit "管理者を変更する", data: { confirm: "このプロジェクトの管理者ではなくなりますがよろしいですか？"},  class: "btn btn-danger" %>
+<% end %>
+</div>
+</div>

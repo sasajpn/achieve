@@ -16,3 +16,18 @@
         blog.save
     end
 end
+
+# even = User.find_by_email("sample-1@sample.com")
+# odd = User.find_by_email("sample-2@sample.com")
+# Task.create(title: "Task 0",
+#             content: "TC0",
+#             done: true,
+#             user: even,
+#             charge: even)
+# 1.upto(100) do |n|
+#     Task.create(title: "Task #{n}",
+#                 content: "TC#{n}",
+#                 done: false,
+#                 user: n.even? ? even : odd,
+#                 charge: n.even? ? even : odd)
+# end                

@@ -1,0 +1,4 @@
+<%= form_for(user.approving_relations.build(approved_id: project.id), url: project_relations_create_approve_user_path(user)) do |f| %>
+<%= f.hidden_field :approved_id %>
+<%= f.submit "参加する", class: "btn btn-primary" %>
+<% end %>

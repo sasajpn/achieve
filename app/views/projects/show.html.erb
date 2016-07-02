@@ -1,0 +1,80 @@
+<h2><%= @project.name %></h2>
+<br>
+<div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active" role="presentation">
+      <a aria-controls="tab_a" data-toggle="tab" href="#tab_a" role="tab">プロジェクトのタスク</a>
+    </li>
+    <li role="presentation">
+      <a aria-controls="tab_b" data-toggle="tab" href="#tab_b" role="tab">参加メンバー</a>
+    </li>
+    <li role="presentation">
+      <a aria-controls="tab_c" data-toggle="tab" href="#tab_c" role="tab">顧客</a>
+    </li>
+    <% if @admin_user == current_user %>
+    <li role="presentation">
+      <a aria-controls="tab_d" data-toggle="tab" href="#tab_d" role="tab">設定</a>
+    </li>
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab_a" role="tabpanel">
+      <br>
+      <div class="new_task">
+      <%= link_to '新しくタスクを作る', new_project_task_path(@project), class: "btn btn-primary" %>
+      </div>
+      <div class="project_task">
+      <%= render partial: 'tasks/index', locals: { tasks: @project.tasks } %> 
+      </div>
+    </div>
+    <div class="tab-pane" id="tab_b" role="tabpanel">
+      <% if @admin_user == current_user %>
+      <br>
+      <p>
+        <%= link_to "ユーザーを招待する", invite_form_project_path(@project), class: "btn btn-primary" %>
+        <%= link_to "招待中ユーザー", inviting_user_project_path(@project), class: "btn btn-success" %>
+      </p>
+      <% else %>
+      <p>
+        <%= render partial: "users/leave_project", locals: { project: @project, user: @user } %>
+      </p>
+      <% end %>
+      <p>
+      <%= render partial: "project_member", locals: { users: @user, admin_user: @admin_user, project: @project} %>
+      </p>
+    </div>
+    
+    <div class="tab-pane" id="tab_c" role="tabpanel">
+      <% if @admin_user == current_user %>
+      <br>
+      <p>
+        <%= link_to "顧客設定", new_project_customer_path(@project), class: "btn btn-primary" %>
+      </p>
+      <% end %>
+      <% if @project.customers.any? %>
+      <p>
+        <%= render partial: "customers/index", locals: { project: @project, customers: @customers, admin_user: @admin_user } %>
+      </p>
+      <% end %>
+    </div>
+    
+    <div class="tab-pane" id="tab_d" role="tabpanel">
+      <% if @project.admin_id == current_user.id %>
+      <br>
+      <p>
+      <%= link_to 'プロジェクトの設定', edit_project_path(@project), class: "btn btn-success" %>
+      </p>
+      <br>
+      <p>
+      <%= link_to "管理者を変更する", change_admin_project_path(@project), class: "btn btn-danger" %>
+      </p>
+      <% unless @users.any? %>
+      <p>
+        <%= link_to "プロジェクトを削除する", project_path(@project), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "btn btn-danger" %>
+      </p>
+      <% end %>
+      <% end %>
+    </div>
+    
+  </div>
+</div>
