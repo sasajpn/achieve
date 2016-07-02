@@ -1,0 +1,25 @@
+<br>
+<p>プロジェクトの管理者: <%= @admin_user.name %></p>
+<% if @users.any? %>
+<div class="col-md-4">
+<table class="table">
+  <thead>
+    <tr>
+      <th>ユーザー名</th>
+    </tr>
+  </thead>
+<% @users.each do |user| %>
+  <tbody>
+    <tr>
+      <td><%= user.name %></td>
+      <td>
+        <% if current_user == @admin_user %>
+        <%= render partial: "leave_member", locals: { project: project, user: user } %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+ <% end %>
+</table>
+</div>
+<% end %>

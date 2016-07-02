@@ -25,6 +25,18 @@ class UsersController < ApplicationController
     @users = @user.followers
     render action: 'show_follow'
   end
+  
+  
+  def invited_project
+    @user = User.find(params[:id])
+    @projects = @user.invited_projects
+  end
+  
+  def join_project
+    @user = current_user
+    @admin_projects = @user.projects
+    @projects = @user.join_project
+  end
 
   
   

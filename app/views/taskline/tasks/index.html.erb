@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="qa-message-list" id="wallmessages">
+        <% if @feed_tasks.any? %>
+        <% @feed_tasks.each do |feedtask| %>
+    				<div class="message-item" id="m16">
+						<div class="message-inner">
+							<div class="message-head clearfix">
+								<div class="message-icon pull-left"><a href="#"><i class="glyphicon glyphicon-check"></i></a></div>
+								<div class="user-detail">
+									<h5 class="handle"><%= feedtask.title %></h5>
+                                    <div class="post-type">
+										<p><%= feedtask.content %></p>
+									</div>
+									<div class="task-user">
+                                        <p><%= feedtask.user.name %></p>
+									</div>
+								</div>
+							</div>
+							<div class="qa-message-content">
+								<div class="message-head clearfix">
+    							<div class="message-icon pull-left"><a href="#"><i class="glyphicon glyphicon-check"></i></a></div>
+								<div class="user-detail">
+									<h5 class="handle">
+									    <div id="goodjob_<%= feedtask.id %>" class="goodjob_count">
+                                            <%= render partial: 'taskline/tasks/gjbcount', locals: { gjb_count: feedtask.goodjobs.sum(:number) } %>
+                                        </div>
+                                        <div class="goodjob_form">
+                                        <%= render partial: 'taskline/tasks/goodjob', locals: { goodjob: feedtask.goodjobs.build(user_id: current_user.id) } %>
+                                        </div>
+                                        <div id="feedtask_<%= feedtask.id %>" class="task_comments">
+                                            <%= render partial: 'taskline/task_comments/index', locals: { task_comments: feedtask.task_comments } %>
+                                        </div>
+									</h5>
+                                    <div class="post-type">
+									    <%= render partial: 'taskline/task_comments/form', locals: { task_comment: feedtask.task_comments.build(user_id: current_user.id) } %>
+									</div>
+								</div>
+							</div>
+							</div>
+			            </div>   
+					</div>
+		<% end %>
+		<% end %>
+		
+		<%= paginate @feed_tasks %>
+	</div>
+</div>

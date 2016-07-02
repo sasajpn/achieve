@@ -1,0 +1,4 @@
+<% @project_member = project.approved_relations.find_by(approving_id: user.id) %>
+<%= form_for(@project_member, url: destroy_project_member_project_relation_path(@project_member), html: { method: :delete }) do |f| %>
+<%= f.submit "メンバーから削除する", data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+<% end %>
