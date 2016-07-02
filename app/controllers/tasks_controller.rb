@@ -33,7 +33,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to project_task_path(@task.project, @task), notice: 'タスクを作成しました。' }
+        format.html { redirect_to project_path(@task.project), notice: 'タスクを作成しました。' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to user_task_path(@task.user, @task), notice: 'タスクを更新しました。' }
+        format.html { redirect_to project_path(@task.project), notice: 'タスクを更新しました。' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to user_tasks_url, notice: 'タスクを削除しました。' }
+      format.html { redirect_to project_path(@task.project), notice: 'タスクを削除しました。' }
       format.json { head :no_content }
     end
   end

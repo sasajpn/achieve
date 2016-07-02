@@ -1,3 +1,45 @@
+<div class="row">
+<div class="col-md-4 col-md-offset-2">
+<br>
+<p>あなたが管理者のプロジェクト</p>
+<div class="col-md-4">
+<table class="table">
+  <thead>
+    <tr>
+      <th>プロジェクト名</th>
+    </tr>
+  </thead>
+<% @admin_projects.each do |admin_project| %>
+  <tbody>
+    <tr>
+      <td><%= link_to "#{admin_project.name}", project_path(admin_project) %></td>
+    </tr>
+  </tbody>
+ <% end %>
+</table>
+</div>
+</div>
+
+<div class="col-md-4">
+<br>
+<p>あなたがメンバーとして参加しているプロジェクト</p>
+<div class="col-md-4">
+<table class="table">
+  <thead>
+    <tr>
+      <th>プロジェクト名</th>
+    </tr>
+  </thead>
 <% @projects.each do |project| %>
-<p><%= link_to "#{project.name}", project_path(project) %></p>
-<% end %>
+  <tbody>
+    <tr>
+      <% unless @admin_projects.include?(project) %>
+      <td><%= link_to "#{project.name}", project_path(project) %></td>
+      <% end %>
+    </tr>
+  </tbody>
+ <% end %>
+</table>
+</div>
+</div>
+</div>

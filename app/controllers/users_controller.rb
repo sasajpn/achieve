@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   
   def join_project
     @user = current_user
+    @admin_projects = @user.projects
     @projects = @user.join_project
   end
 

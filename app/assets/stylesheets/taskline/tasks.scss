@@ -77,7 +77,7 @@ border-radius: 50%;
 -moz-border-radius: 50%;
 -webkit-border-radius: 50%;
 }
-.message-item .message-head .message-icon a i{
+.message-item .message-head .message-icon i{
 color: #fff;
 font-size: 1.3em;
 }
@@ -115,11 +115,6 @@ color: #585b5e;
 font-size: .9em;
 margin: 0;
 }
-img {
- min-height: 40px;
- max-height: 40px;
- border-radius: 50%;
-}
 
 .goodjob_count{
     display: inline-block;
@@ -131,4 +126,8 @@ img {
 
 .task_comments{
     margin-top: 5px;
+}
+
+.list-group-item{
+    font-size: 0.8em;
 }

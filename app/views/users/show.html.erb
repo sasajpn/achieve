@@ -8,6 +8,7 @@
     <% else %>
     <%= profile_img @user %>
     <% end %>
+    <%= @user.name %>
 </h3>
     <p><%= @user.profile %></p>
     <% if current_user && current_user.id == @user.id %>
@@ -19,11 +20,8 @@
 
 </div>
 </div>
-<% if @user == current_user %>
-<%= link_to "招待されているプロジェクト", invited_project_user_path(current_user) %>
-<% end %>
 <% @firend_users ||= current_user %>
-<!--<%= link_to '友達'%>-->
-<%= link_to '戻る', users_path %>
+<!--<%= link_to '友達'%>
+<%= link_to "ユーザー一覧へ", users_path %>
 </div>
 </div>

@@ -1,12 +1,23 @@
+<div class="col-md-4">
+<table class="table">
+  <thead>
+    <tr>
+      <th>プロジェクト名</th>
+    </tr>
+  </thead>
 <% if @projects.any? %>
 <% @projects.each do |project| %>
-<p><%= project.name %></p>
-<div id="approve_form_<%= project.id %>">
-    <% if @user.approving?(project) %>
-    <p class="">参加済み</p>
-    <% else %>
-    <%= render partial: "approve", locals: { user: @user, project: project } %>
-    <% end %>
+<% unless @user.approving?(project) %>
+  <tbody>
+    <tr>
+      <td><%= project.name %></td>
+      <div id="approve_form_<%= project.id %>">
+      <td><%= render partial: "approve", locals: { user: @user, project: project } %></td>
+      </div>
+    </tr>
+  </tbody>
+ <% end %>
+ <% end %>
+ <% end %>
+</table>
 </div>
-<% end %>
-<% end %>

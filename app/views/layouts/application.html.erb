@@ -41,10 +41,13 @@
             <li><%= link_to "ユーザー一覧", users_path %></li>
             <% if user_signed_in? %>
             <li><%= link_to "ブログ", blogs_path %></li>
-            <li><%= link_to "マイタスク", user_tasks_path(current_user.id) %></li>
             <li><%= link_to "タスクライン", taskline_tasks_path %></li>
             <li><%= link_to "プロジェクト作成", new_project_path %></li>
             <li><%= link_to "参加中プロジェクト", join_project_user_path(current_user) %></li>
+            <li><%= link_to "招待されているプロジェクト", invited_project_user_path(current_user) %></li>
+            <% if current_user.tasks.any? %>
+            <li><%= link_to "マイタスク", user_tasks_path(current_user.id) %></li>
+            <% end %>
             <li><%= link_to "マイページ", user_path(current_user) %></li>
             <% end %>
             <li role="separator" class="divider"></li>

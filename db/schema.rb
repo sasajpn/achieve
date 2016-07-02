@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160626180308) do
+ActiveRecord::Schema.define(version: 20160701131837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20160626180308) do
 
   add_index "comments", ["blog_id"], name: "index_comments_on_blog_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "customers", ["project_id"], name: "index_customers_on_project_id", using: :btree
 
   create_table "goodjobs", force: :cascade do |t|
     t.integer  "user_id"
@@ -59,10 +68,14 @@ ActiveRecord::Schema.define(version: 20160626180308) do
     t.integer  "invited_id"
     t.integer  "approving_id"
     t.integer  "approved_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "administer_id"
+    t.integer  "administered_id"
   end
 
+  add_index "project_relations", ["administer_id"], name: "index_project_relations_on_administer_id", using: :btree
+  add_index "project_relations", ["administered_id"], name: "index_project_relations_on_administered_id", using: :btree
   add_index "project_relations", ["approved_id"], name: "index_project_relations_on_approved_id", using: :btree
   add_index "project_relations", ["approving_id", "approved_id"], name: "index_project_relations_on_approving_id_and_approved_id", unique: true, using: :btree
   add_index "project_relations", ["approving_id"], name: "index_project_relations_on_approving_id", using: :btree
@@ -73,10 +86,10 @@ ActiveRecord::Schema.define(version: 20160626180308) do
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.text     "information"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "user_id"
-    t.integer  "admin_user_id", null: false
+    t.integer  "admin_id"
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
@@ -150,6 +163,7 @@ ActiveRecord::Schema.define(version: 20160626180308) do
 
   add_foreign_key "comments", "blogs"
   add_foreign_key "comments", "users"
+  add_foreign_key "customers", "projects"
   add_foreign_key "goodjobs", "tasks"
   add_foreign_key "goodjobs", "users"
   add_foreign_key "projects", "users"

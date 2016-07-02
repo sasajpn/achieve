@@ -6,27 +6,11 @@
               <% unless task_comment.id.nil? %>
               <div class="task_comment_user"><%= task_comment.user.name %></div>
               <div class="task_comment_content"><%= task_comment.content %></div>
-              <!--<%= link_to 'Show', taskline_task_comment_path(task_comment) %>-->
-              <%= link_to '編集', edit_taskline_task_comment_path(task_comment) %>
-              <%= link_to '削除', taskline_task_comment_path(task_comment), method: :delete, remote: true, data: { confirm: '本当に削除してもよろしいですか？' } %>
+              <%= link_to '編集', edit_taskline_task_comment_path(task_comment), class: "btn btn-success btn-xs" %>
+              <%= link_to '削除', taskline_task_comment_path(task_comment), method: :delete, remote: true, data: { confirm: '本当に削除してもよろしいですか？' }, class: "btn btn-danger btn-xs" %>
               <% end %>
             </li>
           </ul>
           <% end %>
         </div><!-- /.col-sm-4 -->
 </div>
-  
-  <!--  <% task_comments.each do |task_comment| %>-->
-  <!--    <tr>-->
-  <!--      <% unless task_comment.id.nil? %>-->
-  <!--      <td><%= task_comment.user.name %></td>-->
-  <!--      <td><%= task_comment.task %></td>-->
-  <!--      <td><%= task_comment.content %></td>-->
-  <!--      <td><%= link_to 'Show', taskline_task_comment_path(task_comment) %></td>-->
-  <!--      <td><%= link_to 'Edit', edit_taskline_task_comment_path(task_comment.task_id, task_comment) %></td>-->
-  <!--      <td><%= link_to 'Destroy', taskline_task_comment_path(task_comment), method: :delete, remote: true, data: { confirm: '本当に削除してもよろしいですか？' } %></td>-->
-  <!--      <% end %>-->
-  <!--    </tr>-->
-  <!--  <% end %>-->
-  <!--</tbody>-->
-

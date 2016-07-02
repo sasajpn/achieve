@@ -34,9 +34,6 @@
                                     <div class="post-type">
 									    <%= render partial: 'taskline/task_comments/form', locals: { task_comment: feedtask.task_comments.build(user_id: current_user.id) } %>
 									</div>
-									<div class="post-time">
-                                        <p></p>
-									</div>
 								</div>
 							</div>
 							</div>
@@ -48,34 +45,3 @@
 		<%= paginate @feed_tasks %>
 	</div>
 </div>
-
-
-
-
-<!--<% if @feed_tasks.any? %>-->
-<!--<div id="feedtask">-->
-<!--    <table>-->
-<!--        <tbody>-->
-<!--            <% @feed_tasks.each do |feedtask| %>-->
-<!--            <div>-->
-<!--                <tr class="feedtask_list">-->
-<!--                    <%= feedtask.title %>-->
-<!--                    <%= feedtask.content %>-->
-<!--                    <%= feedtask.user.name %>-->
-<!--                </tr>-->
-<!--            </div>-->
-<!--            <div id="goodjob_<%= feedtask.id %>">-->
-<!--                <%= render partial: 'taskline/tasks/gjbcount', locals: { gjb_count: feedtask.goodjobs.sum(:number) } %>-->
-<!--            </div>-->
-<!--            <%= render partial: 'taskline/tasks/goodjob', locals: { goodjob: feedtask.goodjobs.build(user_id: current_user.id) } %>-->
-<!--            <div id="feedtask_<%= feedtask.id %>">-->
-<!--                <%= render partial: 'taskline/task_comments/index', locals: { task_comments: feedtask.task_comments } %>-->
-<!--            </div>-->
-<!--            <%= render partial: 'taskline/task_comments/form', locals: { task_comment: feedtask.task_comments.build(user_id: current_user.id) } %>-->
-<!--            <% end %>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-<!--<% end %>-->
-
-<!--<%= paginate @feed_tasks %>-->

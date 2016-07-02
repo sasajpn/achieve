@@ -36,13 +36,18 @@ Rails.application.routes.draw do
       get :inviting_user
       get :project_member
       post 'project_relations/create_invite'
+      get :change_admin
+      patch :change_admin_update
     end
     resources :tasks
+    resources :customers, except: [:show]
   end
   
   resources :project_relations, only: [:create, :destroy] do
     member do
       delete "destroy_invite"
+      delete "destroy_project_member"
+      delete "destroy_join_project"
     end
   end
   

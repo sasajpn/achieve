@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   has_many :tasks, dependent: :destroy
   has_many :task_comments, dependent: :destroy
   has_many :goodjobs, dependent: :destroy
-  has_many :projects, dependent: :destroy
+  
+  has_many :projects, foreign_key: "admin_id"
   
   has_many :invited_relations, foreign_key: "invited_id", class_name: "ProjectRelation", dependent: :destroy
   has_many :approving_relations, foreign_key: "approving_id", class_name: "ProjectRelation", dependent: :destroy
@@ -70,6 +71,15 @@ class User < ActiveRecord::Base
   
   def join_project
     self.invited_projects && self.approving_projects
+  end
+  
+  def join_project?(project)
+    approving_relations.find_by(approved_id: project.id) && invited_relations.find_by(inviting_id: project.id)
+  end
+  
+  def leave_project!(project)
+    approving_relations.find_by(approved_id: project.id).destroy
+    invited_relations.find_by(inviting_id: project.id).destroy
   end
     
   

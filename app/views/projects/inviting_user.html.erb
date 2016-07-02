@@ -1,3 +1,10 @@
+<h4>このプロジェクトに招待しているユーザー</h4>
+<br>
 <% @project.inviting_users.each do |inviting_user| %>
+<% unless inviting_user.join_project?(@project) %>
 <p><%= inviting_user.name %></p>
+<%= render partial: "uninvite", locals: { project: @project, user: inviting_user } %>
 <% end %>
+<% end %>
+<br>
+<%= link_to "プロジェクトページへ", project_path(@project) %>
