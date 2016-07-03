@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  
   namespace :taskline do
     resources :task_comments
   end
-  resources :tasks
+  
+  resources :tasks, only: [:edit, :update]
+  
   get 'relationships/create'
 
   get 'relationships/destroy'
@@ -27,6 +30,14 @@ Rails.application.routes.draw do
       get :invited_project
       get :join_project
       post 'project_relations/create_approve'
+    end
+    resources :submit_requests, shallow: true do
+      get 'approve'
+      get 'unapprove'
+      get 'reject'
+      collection do
+        get 'inbox'
+      end
     end
   end
   

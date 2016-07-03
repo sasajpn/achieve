@@ -1,0 +1,48 @@
+<div class="row">
+<div class="container">
+<% if submit_requests.present? %>
+<p><%= submit_requests.count %>件</p>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>登録者</th>
+                <th>タイトル</th>
+                <th>担当者</th>
+                <th>依頼日</th>
+                <th>ステータス</th>
+                <th>状況</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% submit_requests.each do |sr| %>
+            <div class="sr_tbl">
+                <tr>
+                    <td><%= sr.user.name if sr.user.present? %></td>
+                    <td><%= link_to sr.task.title, user_task_path(sr.task.user, sr.task) %></td>
+                    <% if sr.charge_id == current_user.id %>
+                    <td>(自分)</td>
+                    <% else %>
+                    <td><%= sr.charger.name %></td>
+                    <% end %>
+                    <td><%= sr.created_at.strftime("%y/%m/%d") %></td>
+                    <td><%= status_display_name(sr.status) %></td>
+                    <td><%= done_display_name(sr.task.done) %></td>
+                    <td data-featherlight="#<%= (sr.id) %>"><%= link_to 'メッセージ', submit_request_path(sr) %></td>
+                    <% if sr.charge_id == current_user.id %>
+                    <% if sr.status == 1 %>
+                    <td><%= link_to "承認", submit_request_approve_path(sr), remote: true, class: "btn btn-primary btn-sm", data: { confirm: "本当に承認してもよろしいですか？" } %></td>
+                    <td><%= link_to "却下", submit_request_unapprove_path(sr), remote: true, class: "btn btn-danger btn-sm", data: { confirm: "本当に却下してもよろしいですか？" } %></td>
+                    <% end %>
+                    <% end %>
+                </tr>
+            </div>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+<% end %>
+</div>
+</div>

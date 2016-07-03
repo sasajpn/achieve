@@ -30,9 +30,9 @@
     <%= f.hidden_field :charge_id %>
   </div>
   <div class="field">
-    <%= f.hidden_field :done %>
+    <%= f.label :done, "完了チェック" %><br>
+    <%= f.check_box :done %>
   </div>
-  
   <br>
   <div class="actions">
     <%= f.submit %>

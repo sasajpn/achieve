@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
   
+  has_many :submit_requests, dependent: :destroy
+  
   def follow!(other_user)
     relationships.create!(followed_id: other_user.id)
   end
@@ -40,16 +42,12 @@ class User < ActiveRecord::Base
     relationships.find_by(followed_id: other_user.id)
   end
   
-  def each_other_friends
-    User.each_other_follows(self)
-  end
-  
-  def self.each_other_follows(user)
-    user.followers && user.followed_users
+  def friend
+    self.followed_users & self.followers 
   end
   
   def taskfeed
-    each_other_follows = self.followers && self.followed_users
+    each_other_follows = self.followers & self.followed_users
     Task.where(user: each_other_follows)
   end
   

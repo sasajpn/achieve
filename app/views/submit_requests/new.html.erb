@@ -1,0 +1,18 @@
+<div class="container">
+<div class="submit-request-form">
+<div>
+    <h3>依頼する内容</h3>
+    <div>
+        <% if @users.blank? %>
+        依頼できるユーザーがいません。
+        <% elsif @tasks.present? %>
+        <%= render 'form'%>
+        <% else %>
+        依頼できるものがありません。
+        <% end %>
+    </div>
+</div>
+
+<%= link_to '戻る', user_submit_requests_path(@submit_request.user_id) %>
+</div>
+</div>
