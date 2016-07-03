@@ -16,7 +16,7 @@
 						</div>
 						<div class="post-type">
 							<p>完了期日:<%= @task.deadline %></p>
-							<% if @task.user == current_user.id && @task.status != 1  %>
+							<% if @task.user == current_user && @task.status != 2 %>
 							<p>
 							    <%= link_to '編集', edit_user_task_path(@task.user, @task), class: "btn btn-success btn-sm" %>
                                  <%= link_to '削除', user_task_path(@task.user, @task), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "btn btn-danger btn-sm" %>

@@ -30,7 +30,10 @@
                     					<% elsif task.status == 9 %>
                     					<p>依頼却下<%= link_to "(再依頼)", user_submit_requests_path(current_user) if task.charge_id == current_user.id %></p>
                     					<% elsif task.status == 1 %>
-                    					<p>依頼中</p>
+                    					<p>
+                    						依頼中
+                    						<%= link_to '編集', edit_user_task_path(task.user, task), class: "btn btn-success btn-sm" %>
+                    					</p>
                     					<% elsif task.status == 2 %>
                     					<p>
                     						依頼済 
