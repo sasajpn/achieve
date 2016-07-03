@@ -21,11 +21,11 @@
 										<p>進捗状況:<%= if task.done? then "完了" else "未完了" end %></p>
 										<p>担当者:<%= task.charge.name %></p>
 										<% if task.charge_id == current_user.id  %>
+										<br>
 										<p>
-										  <%= link_to '編集', edit_user_task_path(task.user, task), class: "btn btn-success btn-sm" %>
-                      					  <%= link_to '削除', user_task_path(task.user, task), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "btn btn-danger btn-sm" %>
+											<%= render partial: "tasks/undone_form", locals: { task: task } %>
                     					</p>
-        <% end %>
+        								<% end %>
 									</div>
 								</div>
 							</div>
