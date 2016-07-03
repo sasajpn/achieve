@@ -1,39 +1,38 @@
+<div class="container">
+<div class="row">
+<div class="col-md-8">
+<div class="qa-message-list" id="wallmessages">
+    <div class="message-item" id="m16">
+		<div class="message-inner">
+			<div class="message-head clearfix">
+				<div class="message-icon pull-left"><i class="glyphicon glyphicon-check"></i></div>
+					<div class="user-detail">
+						<h5 class="handle">
+						   タスク名:<%= @task.title %>
+						</h5>
+						<p><%= @task.content %></p>
+						<div class="task-user">
+                    		<p>作成者:<%= @task.user.name %></p>
+						</div>
+						<div class="post-type">
+							<p>完了期日:<%= @task.deadline %></p>
+							<% if @task.user == current_user.id && @task.status != 1  %>
+							<p>
+							    <%= link_to '編集', edit_user_task_path(@task.user, @task), class: "btn btn-success btn-sm" %>
+                                 <%= link_to '削除', user_task_path(@task.user, @task), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "btn btn-danger btn-sm" %>
+                            </p>
+                            <% end %>
+                            <br>
+                            <%= link_to '戻る', inbox_user_submit_requests_path(current_user) %>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
 
 
-<p>
-  <strong>User:</strong>
-  <%= @task.user.name %>
-</p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @task.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @task.content %>
-</p>
-
-<p>
-  <strong>Deadline:</strong>
-  <%= @task.deadline %>
-</p>
-
-<p>
-  <strong>Charge:</strong>
-  <%= @task.charge.name %>
-</p>
-
-<p>
-  <strong>Done:</strong>
-  <%= if @task.done? then "完了" else "未完了" end %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @task.status %>
-</p>
-
-<%= link_to '編集', edit_user_task_path(@task.user, @task) %> |
-<%= link_to 'タスク一覧へ', user_tasks_path(@task.user) %>

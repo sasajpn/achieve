@@ -1,12 +1,13 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :correct_user, only: [:edit, :destroy]
+  before_action :correct_user, only: [:destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.where(user_id: params[:user_id])
+    @tasks = Task.where(charge_id: params[:user_id]).where.not(done: true, status: 1)
+    @finish_tasks = Task.where(charge_id: params[:user_id]).where(done: true)
     @user = User.find(params[:user_id])
   end
 
@@ -18,7 +19,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @project = Project.find(params[:project_id])
-    @task = @project.tasks.build(user_id: current_user.id, charge_id: current_user.id)
+    @task = @project.tasks.build(user_id: current_user.id, charge_id: current_user.id, done: false)
   end
 
   # GET /tasks/1/edit
@@ -47,7 +48,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to project_path(@task.project), notice: 'タスクを更新しました。' }
+        format.html { redirect_to (:back), notice: 'タスクを更新しました。' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -79,6 +80,7 @@ class TasksController < ApplicationController
     
     def correct_user
       @user = User.find(params[:user_id])
+      flash[:alert] = "このタスクの作成者ではありません。"
       redirect_to(user_tasks_path(current_user)) unless current_user == @user
     end
 end

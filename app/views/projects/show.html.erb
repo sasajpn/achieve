@@ -23,8 +23,22 @@
       <div class="new_task">
       <%= link_to '新しくタスクを作る', new_project_task_path(@project), class: "btn btn-primary" %>
       </div>
-      <div class="project_task">
-      <%= render partial: 'tasks/index', locals: { tasks: @project.tasks } %> 
+      <br>
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation">
+        <a aria-controls="tab_a_1" data-toggle="tab" href="#tab_a_1" role="tab">未完了のタスク</a>
+        </li>
+        <li role="presentation">
+        <a aria-controls="tab_a_2" data-toggle="tab" href="#tab_a_2" role="tab">完了済のタスク</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_a_1" role="tabpanel">
+            <%= render partial: 'tasks/index', locals: { tasks: @tasks } %> 
+        </div>
+        <div class="tab-pane" id="tab_a_2" role="tabpanel">
+            <%= render partial: 'tasks/finish_index', locals: { tasks: @finish_tasks } %> 
+        </div>
       </div>
     </div>
     <div class="tab-pane" id="tab_b" role="tabpanel">
@@ -65,10 +79,11 @@
       <%= link_to 'プロジェクトの設定', edit_project_path(@project), class: "btn btn-success" %>
       </p>
       <br>
+      <% if @users.any? %>
       <p>
       <%= link_to "管理者を変更する", change_admin_project_path(@project), class: "btn btn-danger" %>
       </p>
-      <% unless @users.any? %>
+      <% else %>
       <p>
         <%= link_to "プロジェクトを削除する", project_path(@project), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "btn btn-danger" %>
       </p>
