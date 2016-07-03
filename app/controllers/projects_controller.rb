@@ -16,7 +16,8 @@ class ProjectsController < ApplicationController
     @user = current_user
     @admin_user = User.find(@project.admin_id)
     @users = @project.project_member.reject{|admin_user| admin_user == @admin_user }
-    @tasks = @project.tasks
+    @tasks = @project.tasks.where.not(done: true).order(updated_at: :desc)
+    @finish_tasks = @project.tasks.where(done: true).order(updated_at: :desc)
     @customers = @project.customers
   end
 

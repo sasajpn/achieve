@@ -1,0 +1,9 @@
+<%= form_for(task) do |f| %>
+  <div class="field">
+    <%= f.label :done, "完了チェック" %><br>
+    <%= f.check_box :done %>
+  </div>
+  <div class="actions">
+    <%= f.submit "完了を取り消す", class: "btn btn-primary btn-sm", data: { confirm: "完了を取り消しますか？" } %>
+  </div>
+<% end %>

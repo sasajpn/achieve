@@ -1,0 +1,8 @@
+<%= link_to "新規依頼", new_user_submit_request_path, class: "btn btn-primary" %>
+<%= link_to "あなたへの依頼一覧", inbox_user_submit_requests_path, class: "btn btn-success" %>
+<br>
+<br>
+
+<div id="submit_requests_<%= current_user.id %>">
+    <%= render partial: 'index_list', locals: { submit_requests: @submit_requests } %>
+</div>
