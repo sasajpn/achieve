@@ -79,8 +79,11 @@ class TasksController < ApplicationController
     end
     
     def correct_user
-      @user = User.find(params[:user_id])
+      @user = current_user
+      @task = Task.find(params[:id])
+      if @user != @task.user
       flash[:alert] = "このタスクの作成者ではありません。"
-      redirect_to(user_tasks_path(current_user)) unless current_user == @user
+      redirect_to user_tasks_path(current_user)
+      end
     end
 end
