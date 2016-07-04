@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  resources :conversations do
+    resources :messages
+  end
   
   namespace :taskline do
     resources :task_comments
