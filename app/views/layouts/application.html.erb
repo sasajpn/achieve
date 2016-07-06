@@ -33,7 +33,7 @@
        <% if user_signed_in? %>
        <script>
          var pusher = new Pusher('<%= Pusher.key %>');
-         var channel = pusher.subscribe('notificatons' + <%= current_user.id.to_s %>);
+         var channel = pusher.subscribe('notificatons'+<%= current_user.id.to_s %>);
          channel.bind('message', function(data){
            $('#unreadcount').html(data.unread_count);
            alert(data.messaging);
