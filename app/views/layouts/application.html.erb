@@ -43,7 +43,7 @@
          Pusher.logToConsole = true;
     
          var pusher = new Pusher('<%= Pusher.key %>', { encrypted: true });
-         var channel = pusher.subscribe('notificatons'+<%= current_user.id.to_s %>);
+         var channel = pusher.subscribe("notificatons_<%= current_user.id.to_s %>");
          channel.bind('message', function(data){
            $('#unreadcount').html(data.unread_count);
            alert(data.messaging);
