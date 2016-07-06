@@ -11,8 +11,9 @@ require 'pusher'
   pusher_client = Pusher::Client.new(
   app_id: "222452",
   key: "31f8f29da9da9065dbfa",
-  secret: "b606bf29221facff149f"
-  );
+  secret: "b606bf29221facff149f",
+  encrypted: true
+  )
   
- Pusher.logger = Rails.logger
- Pusher.encrypted = true
+ # Pusher.logger = Rails.logger
+ # Pusher.encrypted = true

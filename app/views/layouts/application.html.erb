@@ -40,7 +40,9 @@
       <ul class="nav navbar-nav navbar-right">
        <% if user_signed_in? %>
        <script type="text/javascript">
-         var pusher = new Pusher('<%= Pusher.key %>');
+         Pusher.logToConsole = true;
+    
+         var pusher = new Pusher('<%= Pusher.key %>', { encrypted: true });
          var channel = pusher.subscribe('notificatons'+<%= current_user.id.to_s %>);
          channel.bind('message', function(data){
            $('#unreadcount').html(data.unread_count);
