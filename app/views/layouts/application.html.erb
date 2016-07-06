@@ -40,10 +40,22 @@
       <ul class="nav navbar-nav navbar-right">
        <% if user_signed_in? %>
        <script>
+       Pusher.log = function(message) {
+        if (window.console && window.console.log) {
+        window.console.log(message);
+        }
+        };
+               
+       
          var pusher = new Pusher('<%= Pusher.key %>');
          var channel = pusher.subscribe('notificatons'+<%= current_user.id.to_s %>);
          channel.bind('message', function(data){
+           $('#unreadcount').html(data.unread_count);
            alert(data.messaging);
+           var messagelog = document.getElementById('messagelog');
+           var messagediv = document.createElement('div');
+           messagediv.innerHTML = data.message;
+           messagelog.appendChild(messagediv);
          });
        </script>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
