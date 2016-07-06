@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :destroy]
+  after_action :sending_pusher, only: [:create]
 
   # GET /comments
   # GET /comments.json
@@ -26,10 +27,12 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
+    @blog = @comment.blog
+    @notification = @comment.notifications.build(recipient_id: @blog.user_id, sender_id: current_user.id)
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to blog_path(@comment.blog_id), notice: 'コメントしました。.' }
+        format.html { redirect_to blog_path(@comment.blog_id), notice: 'コメントしました。' }
         format.json { render :show, status: :created, location: @comment }
         @blog = @comment.blog
         format.js { render :index, notice: 'コメントしました。' }
@@ -83,6 +86,10 @@ class CommentsController < ApplicationController
        flash[:alert] = "無効なリクエストです。"
        redirect_to blogs_url
       end
+    end
+    
+    def sending_pusher
+      Notification.sending_pusher(@notification.recipient_id)
     end
     
 end

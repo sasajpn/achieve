@@ -1,10 +1,13 @@
 class ProjectRelationsController < ApplicationController
     respond_to :html, :js
     
+    after_action :sending_pusher, only: [:create_invite]
+    
     def create_invite
         @user = User.find(params[:project_relation][:invited_id])
         @project = Project.find(params[:id])
         @project.invite!(@user)
+        @notification = @project.notifications.create(recipient_id: @user.id, sender_id: current_user.id)
         flash[:notice] = "#{@user.name}さんをこのプロジェクトに招待しました。"
         redirect_to invite_form_project_path(@project)
     end
@@ -43,5 +46,11 @@ class ProjectRelationsController < ApplicationController
         flash[:notice] = "プロジェクトから脱退しました。"
         redirect_to root_path
     end
+    
+    private
+    
+        def sending_pusher
+            Notification.sending_pusher(@notification.recipient_id)
+        end
     
 end

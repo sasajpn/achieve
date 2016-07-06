@@ -11,6 +11,10 @@ class Project < ActiveRecord::Base
     
     has_many :customers, dependent: :destroy
     
+    has_many :notifications, dependent: :destroy
+    
+    accepts_nested_attributes_for :notifications
+    
     def invite!(user)
         inviting_relations.create!(invited_id: user.id)
     end
