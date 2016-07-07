@@ -8,7 +8,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag "bootstrap", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <script src="//js.pusher.com/2.2/pusher.min.js"></script>
+  <script src="//js.pusher.com/3.0/pusher.min.js"></script>
   <meta name="viewport" content="width=device-width">
   <%= csrf_meta_tags %>
   <style>
@@ -39,7 +39,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
        <% if user_signed_in? %>
-       <script>
+       <script data-turbolinks-eval="false">
          Pusher.logToConsole = true;
     
          var pusher = new Pusher('<%= Pusher.key %>');
