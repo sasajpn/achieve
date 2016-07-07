@@ -55,9 +55,11 @@ class ProjectRelationsController < ApplicationController
         end
         
         def invited_pusher
-        @project = Project.find(params[:id])
-             Pusher['notifications_'+@message.conversation.recipient_id.to_s].trigger('invited_project', {
-               messaging: "プロジェクト「#{@project.name}」に招待されました。"
-             })
+            @project = Project.find(params[:id])
+            @user = User.find(params[:project_relation][:invited_id])
+            Pusher['notifications_'+@user.id.to_s].trigger('invited_project', {
+              messaging: "プロジェクト「#{@project.name}」に招待されました。"
+            })
+        end
     
 end
