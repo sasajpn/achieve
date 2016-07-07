@@ -1,10 +1,10 @@
 module NotificationsHelper
     def sender_user(notification)
-        @sender_user_name = User.find(notification.recipient_id).name
+        @sender_user_name = User.find(notification.sender_id).name
     end
     
     def receive_user(notification)
-        @receive_user_name = User.find(notification.sender_id).name
+        @receive_user_name = User.find(notification.recipient_id).name
     end
     
     def posted_time(time)

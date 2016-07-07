@@ -1,17 +1,17 @@
-<div class="cintainer">
+<div class="container">
     <h2>お知らせ</h2>
     <hr>
     <% @notifications.each do |notification| %>
     <ul class="notification-list">
         <li>
-            <span class="label label-pill label-default"><%= display_read_status(notification.read) %></span>
             <p>
-                <%= receive_user(notification) %>さんが
                 <small class="dropdown">
                     <% if notification.comment.present? %>
-                    ブログ「<%= notification.comment.blog.title %>」にコメントしました。
+                    <%= link_to "ブログ「#{notification.comment.blog.title}」に#{sender_user(notification)}さんがコメントしました。", blog_path(notification.comment.blog) %>
                     <% elsif notification.project.present? %>
-                    プロジェクト「<%= notification.project.name %>」にあなたを招待しました。
+                    <%= link_to "プロジェクト「#{notification.project.name}」に#{sender_user(notification)}さんがあなたを招待しました。", invited_project_user_path(notification.recipient_id) %>
+                    <% elsif notification.message.present? %>
+                    <%= link_to "#{notification.message.user.name}さんからメッセージが届きました。", conversation_messages_path(notification.message.conversation) %>
                     <% end %>
                 </small>
             </p>

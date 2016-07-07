@@ -1,13 +1,14 @@
-<div class="notifications-index">
+<div id="notifications_<%= current_user.id %>" class="notifications-index">
     <li>
         <% if notifications.present? %>
         <% notifications.each do |notification| %>
         <% unless notification.read %>
-        <span class="label label^pill label-warning">既読</span>
         <% if notification.comment.present? %>
-        <small class="dropdown">ブログ「<%= notification.comment.blog.title %>」に<%= sender_user(notification) %>さんがコメントしました。</small>
+        <small class="dropdown"><%= link_to "ブログ「#{notification.comment.blog.title}」に#{sender_user(notification)}さんがコメントしました。", blog_path(notification.comment.blog) %></small>
         <% elsif notification.project.present? %>
-        <small class ="dropdown">プロジェクト「<%= notification.project.name %>」に<%= sender_user(notification) %>さんがあなたを招待しました。</small>
+        <small class="dropdown"><%= link_to "プロジェクト「#{notification.project.name}」に#{sender_user(notification)}さんがあなたを招待しました。", invited_project_user_path(notification.recipient_id) %></small>
+        <% elsif notification.message.present? %>
+        <small class="dropdown"><%= link_to "#{notification.message.user.name}さんからメッセージが届きました。", conversation_messages_path(notification.message.conversation) %></small>
         <% end %>
         <p class="palette-paragraph text-right">
             <small class="dropdown">
