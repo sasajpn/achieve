@@ -15,12 +15,12 @@ class ApplicationController < ActionController::Base
   
   protected
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:account_update) do |user_params|
-        user_params.permit(:name, :image, :remove_image, :profile)
-      # devise_parameter_sanitizer.for(:account_update) << :name
-      # devise_parameter_sanitizer.for(:account_update) << :image
-      # devise_parameter_sanitizer.for(:account_update) << :remove_image
-      # devise_parameter_sanitizer.for(:account_update) << :profile
-      end
+      # devise_parameter_sanitizer.permit(:account_update) do |user_params|
+      #   user_params.permit(:name, :image, :remove_image, :profile)
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:image])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:remove_image])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:profile])
+      # end
     end
 end
