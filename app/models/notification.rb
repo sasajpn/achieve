@@ -12,7 +12,7 @@ class Notification < ActiveRecord::Base
     scope :unread_count, -> (user_id) { where(recipient_id: user_id).unread.count }
     
     def self.sending_pusher(channel_user_id)
-        Pusher.trigger("notifications_#{channel_user_id}", "message", {
+        Pusher['notifications_'+channel_user_id.to_s].trigger('message', {
             unread_count: Notification.unread_count(channel_user_id)
         })
     end

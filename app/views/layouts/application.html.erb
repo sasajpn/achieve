@@ -8,7 +8,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag "bootstrap", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <script src="//js.pusher.com/3.1/pusher.min.js" type="text/javascript"></script>
+  <script src="http://js.pusher.com/3.0/pusher.min.js" type="text/javascript"></script>
   <meta name="viewport" content="width=device-width">
   <%= csrf_meta_tags %>
   <style>
@@ -43,7 +43,7 @@
          Pusher.logToConsole = true;
     
          var pusher = new Pusher('<%= Pusher.key %>', { encrypted: true });
-         var channel = pusher.subscribe("notificatons_<%= current_user.id %>");
+         var channel = pusher.subscribe('notifications_'+<%= current_user.id.to_s %>);
          channel.bind('message', function(data){
            $('#unreadcount').html(data.unread_count);
            alert(data.messaging);
