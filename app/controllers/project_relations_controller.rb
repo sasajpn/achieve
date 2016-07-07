@@ -2,6 +2,7 @@ class ProjectRelationsController < ApplicationController
     respond_to :html, :js
     
     after_action :sending_pusher, only: [:create_invite]
+    after_action :invited_pusher, only: [:create_invite]
     
     def create_invite
         @user = User.find(params[:project_relation][:invited_id])
@@ -52,5 +53,11 @@ class ProjectRelationsController < ApplicationController
         def sending_pusher
             Notification.sending_pusher(@notification.recipient_id)
         end
+        
+        def invited_pusher
+        @project = Project.find(params[:id])
+             Pusher['notifications_'+@message.conversation.recipient_id.to_s].trigger('invited_project', {
+               messaging: "プロジェクト「#{@project.name}」に招待されました。"
+             })
     
 end
