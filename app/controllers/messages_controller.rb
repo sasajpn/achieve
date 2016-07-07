@@ -4,6 +4,8 @@ class MessagesController < ApplicationController
     @conversation = Conversation.find(params[:conversation_id])
   end
   
+  after_action :sending_pusher, only: [:create]
+  
   def index
     @messages = @conversation.messages
     if @messages.length > 10

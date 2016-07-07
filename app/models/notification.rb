@@ -6,6 +6,7 @@ class Notification < ActiveRecord::Base
     belongs_to :recipient, class_name: "Conversation", foreign_key: :recipient_id
     belongs_to :comment, class_name: "Comment", foreign_key: :comment_id
     belongs_to :project, class_name: "Project", foreign_key: :project_id
+    belongs_to :message, class_name: "Message", foreign_key: :message_id
     
     scope :read, -> { where(read: true) }
     scope :unread, -> { where(read: false) }
