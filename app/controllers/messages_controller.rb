@@ -30,6 +30,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = @conversation.messages.build(message_params)
+    @notification = @message.notifications.build(recipient_id: @message.conversation.recipient_id, sender_id: current_user.id)
     if @message.save
       if @message.user_id == @conversation.sender_id
         Pusher['notifications_'+@message.conversation.recipient_id.to_s].trigger('message', {
@@ -47,5 +48,9 @@ class MessagesController < ApplicationController
   private
     def message_params
       params.require(:message).permit(:body, :user_id)
+    end
+    
+    def sending_pusher
+      Notification.sending_pusher(@notification.recipient_id)
     end
 end
