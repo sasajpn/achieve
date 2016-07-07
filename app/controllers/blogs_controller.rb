@@ -79,8 +79,10 @@ class BlogsController < ApplicationController
     
     def correct_user
       @blog = current_user.blogs.find_by(id: params[:id])
+      unless @blog.user == current_user
       flash[:alert] = "無効なリクエストです。"
       redirect_to blogs_url if @blog.nil?
+      end
     end
     
     

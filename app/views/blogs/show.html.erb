@@ -23,7 +23,10 @@
   <%= render partial: 'comments/form', locals: { comment: @comment } %>
 </p>
 
-<%= link_to 'ブログを編集する', edit_blog_path(@blog) %> |
+<% if @blog.user == current_user %>
+<%= link_to 'ブログを編集する', edit_blog_path(@blog) %>
+<% end %>
+<br>
 <%= link_to 'ブログ一覧へ', blogs_path %>
 
 </div>
