@@ -36,7 +36,7 @@ class MessagesController < ApplicationController
           messaging: "メッセージが届いています。:#{@message.body}"
         })
       else
-        Pusher['notifications_'+@message.coversation.sender_id.to_s].trigger('message', {
+        Pusher['notifications_'+@message.conversation.sender_id.to_s].trigger('message', {
           messaging: "メッセージが届いています。:#{@message.body}"
         })
       end
