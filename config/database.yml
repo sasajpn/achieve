@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: achieve_production
-  username: <%= ENV['PRODUCTION_USER'] %>
-  password: <%= ENV['ACHIEVE_DATABASE_PASSWORD'] %>
+  username: 'root'
+  password: <%= ENV['ACHIEVE_DATABASE_PASSWORD']
