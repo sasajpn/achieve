@@ -1,27 +1,20 @@
-# config valid only for Capistrano 3.1
+# config valid only for current version of Capistrano
 lock '3.4.0'
 
+# アプリケーション名
 set :application, 'achieve'
+
+# deployするレポジトリ
 set :repo_url, 'git@github.com:sasajpn/achieve.git'
 
-set :branch, 'master'
-
-set :deploy_to, '/var/www/rails/achieve'
-
-set :linked_files, fetch(:linked_files, []).push('config/settings/production.yml')
-
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-
-set :keep_releases, 5
-
-set :rbenv_ruby, '2.3.0'
-
-set :log_level, :debug
 # Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+# deployするブランチ。デフォルトはmasterなのでなくても可。
+set :branch, 'master'
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-# Default deploy_to directory is /var/www/my_app
-# set :deploy_to, '/var/www/my_app'
+# Default deploy_to directory is /var/www/my_app_name
+# deploy先のディレクトリ
+set :deploy_to, '/var/www/rails/achieve'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -36,16 +29,22 @@ set :log_level, :debug
 # set :pty, true
 
 # Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
+# シンボリックリンクをはるファイル。今回はgemのconfigを使用して、production.ymlを共通化。
+# set :linked_files, fetch(:linked_files, []).push('config/settings/production.yml')
 
 # Default value for linked_dirs is []
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+# シンボリックリンクをはるフォルダ。
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+# 保持するバージョンの個数
+set :keep_releases, 5
+
+# rubyのバージョン
+set :rbenv_ruby, '2.3.0'
 
 namespace :deploy do
   desc 'Restart application'
@@ -81,5 +80,4 @@ namespace :deploy do
       # end
     end
   end
-
 end

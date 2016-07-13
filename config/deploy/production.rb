@@ -38,8 +38,8 @@
 #     # password: 'please use keys'
 #   }
 
+
+# set :stage, :production
+# set :rails_env, 'production'
 server '52.69.140.80', user: 'kazuki', roles: %w{app} #serverのipとuser名は適宜
-set :ssh_options, {
-    keys: '~/.ssh/first_aws_rsa'
-    # keys: [File.expand_path('~/.ssh/achieve-key.pem')]
-}
+set :ssh_options, keys: '~/.ssh/first_aws_rsa'
