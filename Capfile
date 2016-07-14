@@ -16,13 +16,13 @@ require 'capistrano/deploy'
 #   https://github.com/capistrano/passenger
 #
 # require 'capistrano/rvm'
-require 'capistrano/rbenv' #コメントアウトをはずす
+require 'capistrano/rbenv'
 # require 'capistrano/chruby'
 require 'capistrano/bundler' #コメントアウトをはずす
 require 'capistrano/rails/assets' #コメントアウトをはずす
 require 'capistrano/rails/migrations' #コメントアウトをはずす
 # require 'capistrano/passenger'
-require 'capistrano3/unicorn' #追記
+require 'capistrano3/unicorn'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob('lib/capistrano/tasks/*.task').each { |r| import r }

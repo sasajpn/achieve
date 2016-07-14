@@ -98,9 +98,9 @@ GEM
       dotenv (= 2.1.1)
       railties (>= 4.0, < 5.1)
     erubis (2.7.0)
-    exception_notification (4.1.4)
-      actionmailer (~> 4.0)
-      activesupport (~> 4.0)
+    exception_notification (4.2.0)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
     faker (1.6.5)
       i18n (~> 0.5)
@@ -265,8 +265,9 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
-    unicorn (5.1.0)
+    unicorn (4.9.0)
       kgio (~> 2.6)
+      rack
       raindrops (~> 0.7)
     warden (1.2.6)
       rack (>= 1.0)
@@ -318,7 +319,7 @@ DEPENDENCIES
   therubyracer
   turbolinks
   uglifier
-  unicorn
+  unicorn (= 4.9.0)
   web-console (~> 2.0)
 
 BUNDLED WITH

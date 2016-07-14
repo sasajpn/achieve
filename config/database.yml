@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  encoding: utf8
   database: achieve_production
   username: root
   password: 

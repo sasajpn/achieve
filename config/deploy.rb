@@ -23,7 +23,7 @@ set :deploy_to, '/var/www/rails/achieve'
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+set :log_level, :debug
 
 # Default value for :pty is false
 # set :pty, true
@@ -31,6 +31,8 @@ set :deploy_to, '/var/www/rails/achieve'
 # Default value for :linked_files is []
 # シンボリックリンクをはるファイル。今回はgemのconfigを使用して、production.ymlを共通化。
 # set :linked_files, fetch(:linked_files, []).push('config/settings/production.yml')
+# set :linked_files, %w{config/database.yml}
+# set :linked_files, %w{ config/secrets.yml }
 
 # Default value for linked_dirs is []
 # シンボリックリンクをはるフォルダ。
@@ -44,6 +46,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :keep_releases, 5
 
 # rubyのバージョン
+# set :rbenv_type, :user
 set :rbenv_ruby, '2.3.0'
 
 namespace :deploy do
