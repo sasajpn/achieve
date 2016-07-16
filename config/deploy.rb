@@ -1,6 +1,6 @@
   # config valid only for current version of Capistrano
   lock '3.4.0'
-  set :rbenv_ruby,    '2.3.0'
+  set :rbenv_ruby,    '2.3.0-p0'
   set :application,   'kazuki'
   set :repo_url,      'git@github.com:sasajpn/achieve.git'
   set :branch,        'master'
