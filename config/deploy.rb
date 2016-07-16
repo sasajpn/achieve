@@ -1,14 +1,32 @@
-  # config valid only for current version of Capistrano
-  lock '3.4.0'
-  set :rbenv_ruby,    '2.3.0'
-  set :application,   'achieve'
-  set :repo_url,      'git@github.com:sasajpn/achieve.git'
-  set :branch,        'master'
-  set :deploy_to,     '/var/www/rails/achieve'
-  set :linked_dirs,   fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-  set :keep_releases, 3
-  set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
-  
+# capistranoのバージョン固定
+lock '3.4.0'
+
+# デプロイするアプリケーション名
+set :application, 'achieve'
+
+# cloneするgitのレポジトリ
+set :repo_url, 'git@github.com:sasajpn/achieve.git'
+# deployするブランチ。デフォルトはmasterなのでなくても可。
+set :branch, 'master'
+
+# deploy先のディレクトリ。
+set :deploy_to, '/var/www/rails/achieve'
+
+# シンボリックリンクをはるファイル。(※後述)
+set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
+
+# シンボリックリンクをはるフォルダ。(※後述)
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+
+# 保持するバージョンの個数(※後述)
+set :keep_releases, 5
+
+# rubyのバージョン
+set :rbenv_ruby, '2.3.0'
+
+#出力するログのレベル。
+set :log_level, :debug
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
