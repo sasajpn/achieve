@@ -1,42 +1,47 @@
-# production.rb
-root = "/var/www/rails/achieve/current" # TODO
-working_directory root
-pid "#{root}/tmp/pids/unicorn.pid"
-stderr_path "#{root}/log/unicorn.log"
-stdout_path "#{root}/log/unicorn.log"
+app_path = '/var/www/rails/achieve'
 
-listen "/tmp/unicorn.sock"
-worker_processes 3
-timeout 30
+worker_processes 2
+working_directory "#{app_path}" + "/current"
 
+# This loads the application in the master process before forking
+# worker processes
+# Read more about it here:
+# http://unicorn.bogomips.org/Unicorn/Configurator.html
 preload_app true
 
-before_exec do |server|
-  ENV["BUNDLE_GEMFILE"] = "#{root}/Gemfile"
+timeout 30
+
+# This is where we specify the socket.
+# We will point the upstream Nginx module to this socket later on
+#listen "#{app_path}/tmp/sockets/unicorn.sock", :backlog => 64
+listen "/tmp/unicorn.sock", :backlog => 64
+
+#pid "/tmp/unicorn.pid"
+pid "#{app_path}/shared/tmp/pids/unicorn.pid"
+
+# Set the path of the log files inside the log folder of the testapp
+stderr_path "#{app_path}/current/log/unicorn.stderr.log"
+stdout_path "#{app_path}/current/log/unicorn.stdout.log"
+
+before_fork do |server, worker|
+  ENV['BUNDLE_GEMFILE'] = File.expand_path('Gemfile', ENV['RAILS_ROOT'])
 end
 
 before_fork do |server, worker|
-  # the following is highly recomended for Rails + "preload_app true"
-  # as there"s no need for the master process to hold a connection
-  if defined?(ActiveRecord::Base)
-    ActiveRecord::Base.connection.disconnect!
-  end
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
 
-  # Before forking, kill the master process that belongs to the .oldbin PID.
-  # This enables 0 downtime deploys.
-  old_pid = "#{root}/tmp/pids/unicorn.pid.oldbin"
-  if File.exists?(old_pid) && server.pid != old_pid
+  old_pid = "#{server.config[:pid]}.oldbin"
+  if old_pid != server.pid
     begin
-      Process.kill("QUIT", File.read(old_pid).to_i)
+      sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
+      Process.kill(sig, File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH
-      # someone else did our job for us
     end
   end
+
+  sleep 1
 end
 
 after_fork do |server, worker|
-  # the following is *required* for Rails + "preload_app true",
-  if defined?(ActiveRecord::Base)
-    ActiveRecord::Base.establish_connection
-  end
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
 end

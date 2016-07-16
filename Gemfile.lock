@@ -265,9 +265,8 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
-    unicorn (4.9.0)
+    unicorn (5.1.0)
       kgio (~> 2.6)
-      rack
       raindrops (~> 0.7)
     warden (1.2.6)
       rack (>= 1.0)
@@ -319,7 +318,7 @@ DEPENDENCIES
   therubyracer
   turbolinks
   uglifier
-  unicorn (= 4.9.0)
+  unicorn
   web-console (~> 2.0)
 
 BUNDLED WITH

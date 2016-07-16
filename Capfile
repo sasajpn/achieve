@@ -1,13 +1,19 @@
-  # Load DSL and set up stages
-  require 'capistrano/setup'
-  # Include default deployment tasks
-  require 'capistrano/deploy'
-  # Include tasks from other gems included in your Gemfile
-  require 'capistrano/rbenv'
-  require 'capistrano/bundler'
-  require 'capistrano/rails/assets'
-  require 'capistrano/rails/migrations'
-  # Include slack notifier
-  # require 'slackistrano'
-  # Load custom tasks from `lib/capistrano/tasks` if you have any defined
-  Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
+# [必須] Capistranoの設定を読み込む。おまじない
+require 'capistrano/setup'
+
+# [必須] デプロイフレームワークを読み込み。
+require 'capistrano/deploy'
+
+# rbenvを使用している場合
+require 'capistrano/rbenv'
+
+require 'capistrano/rails'
+require 'capistrano/rails/assets'
+require 'capistrano/rails/migrations'
+
+require 'capistrano/bundler'
+require 'capistrano3/unicorn' # unicornを使っている場合のみ
+
+
+# [必須] `lib/capistrano/tasks' に定義されたタスクを読み込む
+Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
