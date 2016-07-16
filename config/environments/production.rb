@@ -79,7 +79,8 @@ Rails.application.configure do
   
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'blooming-ridge-58222.herokuapp.com'
+  # host = 'blooming-ridge-58222.herokuapp.com'
+  host = '52.69.140.80'
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings =
   # {
