@@ -1,48 +1,48 @@
-  namespace :unicorn do
-    task :environment do
-      set :unicorn_pid,    "#{current_path}/tmp/pids/unicorn.pid"
-      set :unicorn_config, "#{current_path}/config/unicorn.conf.rb"
-    end
-    def start_unicorn
-      within current_path do
-        execute :bundle, :exec, :unicorn, "-c #{fetch(:unicorn_config)} -E #{fetch(:rails_env)} -D"
-      end
-    end
-    def stop_unicorn
-      execute :kill, "-s QUIT $(< #{fetch(:unicorn_pid)})"
-    end
-    def reload_unicorn
-      execute :kill, "-s USR2 $(< #{fetch(:unicorn_pid)})"
-    end
-    def force_stop_unicorn
-      execute :kill, "$(< #{fetch(:unicorn_pid)})"
-    end
-    desc "Start unicorn server"
-    task start: :environment do
-      on roles(:app) do
-        start_unicorn
-      end
-    end
-    desc "Stop unicorn server gracefully"
-    task stop: :environment do
-      on roles(:app) do
-        stop_unicorn
-      end
-    end
-    desc "Restart unicorn server gracefully"
-    task restart: :environment do
-      on roles(:app) do
-        if test("[ -f #{fetch(:unicorn_pid)} ]")
-          reload_unicorn
-        else
-          start_unicorn
-        end
-      end
-    end
-    desc "Stop unicorn server immediately"
-    task force_stop: :environment do
-      on roles(:app) do
-        force_stop_unicorn
-      end
+app_path = '/var/www/rails/achieve'
+
+worker_processes 2
+working_directory "#{app_path}" + "/current"
+
+# This loads the application in the master process before forking
+# worker processes
+# Read more about it here:
+# http://unicorn.bogomips.org/Unicorn/Configurator.html
+preload_app true
+
+timeout 30
+
+# This is where we specify the socket.
+# We will point the upstream Nginx module to this socket later on
+#listen "#{app_path}/tmp/sockets/unicorn.sock", :backlog => 64
+listen "/tmp/unicorn.sock", :backlog => 64
+
+#pid "/tmp/unicorn.pid"
+pid "#{app_path}/shared/tmp/pids/unicorn.pid"
+
+# Set the path of the log files inside the log folder of the testapp
+stderr_path "#{app_path}/current/log/unicorn.stderr.log"
+stdout_path "#{app_path}/current/log/unicorn.stdout.log"
+
+before_fork do |server, worker|
+  ENV['BUNDLE_GEMFILE'] = File.expand_path('Gemfile', ENV['RAILS_ROOT'])
+end
+
+before_fork do |server, worker|
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+
+  old_pid = "#{server.config[:pid]}.oldbin"
+  if old_pid != server.pid
+    begin
+      sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
+      Process.kill(sig, File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
     end
   end
+
+  sleep 1
+end
+
+after_fork do |server, worker|
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
+end
+7. デ
