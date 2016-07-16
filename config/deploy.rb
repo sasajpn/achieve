@@ -1,6 +1,6 @@
   # config valid only for current version of Capistrano
   lock '3.4.0'
-  set :rbenv_ruby,    '2.3.0-p0'
+  set :rbenv_ruby,    '2.3.0'
   set :application,   'kazuki'
   set :repo_url,      'git@github.com:sasajpn/achieve.git'
   set :branch,        'master'
@@ -8,6 +8,7 @@
   set :linked_dirs,   fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
   set :keep_releases, 3
   set :linked_files, %w{config/database.yml}
+  set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
   
   namespace :deploy do
     desc 'Restart application'
