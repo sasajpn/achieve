@@ -16,7 +16,7 @@ set :deploy_to, '/var/www/rails/achieve'
 set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
 
 # シンボリックリンクをはるフォルダ。(※後述)
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/assets')
 
 # 保持するバージョンの個数(※後述)
 set :keep_releases, 5
