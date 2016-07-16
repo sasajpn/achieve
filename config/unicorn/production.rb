@@ -23,9 +23,10 @@ pid "#{app_path}/shared/tmp/pids/unicorn.pid"
 stderr_path "#{app_path}/current/log/unicorn.stderr.log"
 stdout_path "#{app_path}/current/log/unicorn.stdout.log"
 
-before_fork do |server, worker|
-  ENV['BUNDLE_GEMFILE'] = File.expand_path('Gemfile', ENV['RAILS_ROOT'])
-end
+root = "/var/www/rails/achieve/current" 
+before_exec do |server| 
+ENV['BUNDLE_GEMFILE'] = "#{root}/Gemfile" 
+end 
 
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
