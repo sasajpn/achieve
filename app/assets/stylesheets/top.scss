@@ -188,7 +188,7 @@ body{
 .top{
     
 .jumbotron{
-    background: #000 image-url("achieve.png") center center;
+    background: #000 url(<%= asset_data_uri 'achieve.png' %>) center center;
     background-size: cover;
     h1,p{
         color: white;
