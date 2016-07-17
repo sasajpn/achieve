@@ -6,8 +6,8 @@ class EmailController < ApplicationController
             retriever_method :pop3, {
                 :address => "pop.gmail.com",
                 :port => 995,
-                :user_name => "recent:#{ENV['GMAIL_ADDRESS']}",
-                :password => ENV['GMAIL_PASSWORD'],
+                :user_name => "recent:achieve.dic.sasahara@gmail.com",
+                :password => "gbrolnwkpkmtfuwj",
                 :enable_ssl => true
                 }
         end
