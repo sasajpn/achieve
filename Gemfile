@@ -33,6 +33,7 @@ group :production, :staging do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
+  gem 'dotenv-rails'
 end
 
 group :development, :test do
@@ -44,6 +45,8 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  
+  gem 'dotenv-rails'
   
   
 end
@@ -67,4 +70,3 @@ gem 'mail'
 gem 'exception_notification'
 gem 'kaminari'
 gem 'pusher'
-gem 'dotenv-rails'
