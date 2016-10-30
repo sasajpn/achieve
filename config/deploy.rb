@@ -2,7 +2,7 @@ lock '3.6.0'
 
 set :application, 'achieve'
 
-set :repo_url, 'git@github.com:sasajpn/achieve.git'
+set :repo_url, 'https://github.com/sasajpn/achieve.git'
 
 set :branch, ENV['BRANCH'] || 'master'
 
