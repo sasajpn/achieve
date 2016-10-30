@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
   
-  mount_uploader :image, ImageUploader       
-
   has_many :blogs, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :tasks, dependent: :destroy
