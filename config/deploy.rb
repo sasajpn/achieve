@@ -9,7 +9,7 @@ set :branch, ENV['BRANCH'] || 'master'
 set :deploy_to, '/var/www/achieve'
 
 set :linked_files, %w{.env config/secrets.yml}
-set :linked_files, %w{log tmp/pids tmp/cache tmp/soclets public/uploads}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/soclets public/uploads}
 
 set :keep_releases, 5
 
@@ -46,13 +46,13 @@ namespace :deploy do
     end
   end
 
-  desc 'upload important files'
-  task :upload do
-    on roles(:app) do |host|
-      execute :mkdir, '-p', '/var/www/achieve/shared/config'
-      upload!('config/database.yml','/var/www/achieve/config/secrets.yml')
-    end
-  end
+  #desc 'upload important files'
+  #task :upload do
+  #  on roles(:app) do |host|
+  #    execute :mkdir, '-p', '/var/www/achieve/shared/config'
+  #    upload!('config/database.yml','/var/www/achieve/config/secrets.yml')
+  #  end
+  #end
 
   after :publishing, :restart
 
