@@ -46,6 +46,14 @@ namespace :deploy do
     end
   end
 
+  desc 'upload important files'
+  task :upload do
+    on roles(:app) do |host|
+      execute :mkdir, '-p', '/var/www/achieve/shared/config'
+      upload!('config/database.yml','/var/www/achieve/config/secrets.yml')
+    end
+  end
+
   after :publishing, :restart
 
   after :restart, :clear_cache do
