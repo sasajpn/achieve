@@ -13,7 +13,7 @@ set :linked_files, %w{log tmp/pids tmp/cache tmp/soclets public/uploads}
 
 set :keep_releases, 5
 
-set :rbenv_ruby, '2.3.0'
+set :rbenv_ruby, '2.3.1'
 set :rbenv_type, :system
 
 set :log_level, :debug
