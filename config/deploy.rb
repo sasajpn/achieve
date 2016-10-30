@@ -9,7 +9,7 @@ set :branch, ENV['BRANCH'] || 'master'
 set :deploy_to, '/var/www/achieve'
 
 set :linked_files, %w{.env config/secrets.yml}
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/soclets public/uploads}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}
 
 set :keep_releases, 5
 
