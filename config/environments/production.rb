@@ -79,26 +79,16 @@ Rails.application.configure do
   
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  # host = 'blooming-ridge-58222.herokuapp.com'
-  host = '52.69.140.80'
+  host = ENV['MAIL_HOST']
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings =
-  # {
-  #   :user_name => ENV['SENDGRID_USERNAME'],
-  #   :password => ENV['SENDGRID_PASSWORD'],
-  #   :domain => "heroku.com",
-  #   :address => "smtp.sendgrid.net",
-  #   :port => 587,
-  #   :authentication => :plain,
-  #   :enable_starttls_auto => true
-  # }
     {
       :enable_starttls_auto => true,
       :address => "smtp.gmail.com",
       :port => 587,
       :domain => 'smtp.gmail.com',
-      user_name: "achieve.dic.sasahara@gmail.com",
-      password: "gbrolnwkpkmtfuwj",
+      user_name: ENV['MAIL_NAME'],
+      password: ENV['MAIL_PASS'],
       :authentication => 'plain'
     }
 end

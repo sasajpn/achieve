@@ -13,7 +13,6 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
@@ -22,8 +21,8 @@ Rails.application.configure do
     :address => "smtp.gmail.com",
     :port => 587,
     :domain => 'smtp.gmail.com',
-    user_name: ENV['GMAIL_ADDRESS'],
-    password: ENV['GMAIL_PASSWORD'],
+    user_name: ENV['MAIL_NAME'],
+    password: ENV['MAIL_PASS'],
     :authentication => 'plain'
   }
 
@@ -51,16 +50,9 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  #deviseの設定
-  # config.action_mailer.default_url_options = { host: 'blooming-ridge-58222.herokuapp.com' }
   
   require 'pusher'
-  # Pusher.app_id = ENV['PUSHER_APP_ID']
-  # Pusher.key = ENV['PUSHER_KEY']
-  # Pusher.secret = ENV['PUSHER_SECRET']
-  
-    Pusher.app_id = '222452'
-    Pusher.key = '31f8f29da9da9065dbfa'
-    Pusher.secret = 'b606bf29221facff149f'
-
+    Pusher.app_id = <%= ENV['PUSHER_ID'] %>
+    Pusher.key = <%= ENV['PUSHER_KEY'] %>
+    Pusher.secret = <%= ENV['PUSHER_SECRET'] %>
 end

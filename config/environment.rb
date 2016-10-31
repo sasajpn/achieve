@@ -20,7 +20,7 @@ ActionMailer::Base.smtp_settings =
       :address => "smtp.gmail.com",
       :port => 587,
       :domain => 'smtp.gmail.com',
-      user_name: "achieve.dic.sasahara@gmail.com",
-      password: "gbrolnwkpkmtfuwj",
+      user_name: ENV['MAIL_NAME'],
+      password: ENV['MAIL_PASS'],
       :authentication => 'plain'
     }

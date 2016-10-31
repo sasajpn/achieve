@@ -15,3 +15,5 @@
 /public/assets/*
 
 .env
+
+/config/secrets.yml
