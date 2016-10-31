@@ -1,6 +1,7 @@
-server 'server-sasa.win',
+server '150.95.131.121',
 user:  'sasahara',
 roles: %w{app db web}
-set :ssh_options,
+set :ssh_options, {
 port: '9724',
-keys: File.expand_path('~/.ssh/id_rsa')
+keys: File.expand_path('~/.ssh/id_rsa'),
+}
